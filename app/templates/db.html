@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} Database Dump {% endblock %}
+{% block content %}
+    <h1>Database Dump</h1>
+    <table>
+        <tr>
+            <th>User ID</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.uid }}</td>
+            <td>{{ user.Email }}</td>
+            <td>{{ user.First_name }}</td>
+            <td>{{ user.Last_name }}</td>
+            <td>{{ user.Phone_number }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <table>
+        <tr>
+            <th>Reservation ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Room Number</th>
+            <th>Number of Guests</th>
+            <th>User ID</th>
+        </tr>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.rid }}</td>
+            <td>{{ reservation.start_date }}</td>
+            <td>{{ reservation.end_date }}</td>
+            <td>{{ reservation.room_number }}</td>
+            <td>{{ reservation.num_of_guests }}</td>
+            <td>{{ reservation.user_id }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

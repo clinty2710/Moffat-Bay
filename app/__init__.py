@@ -45,6 +45,9 @@ def create_tables():
                 password=os.environ['DB_PASSWORD'],
             )
             cursor = connection.cursor()
+            #drop database if exists
+            cursor.execute(f"DROP DATABASE IF EXISTS {os.environ['DB_DATABASE']}")
+            #create database
             cursor.execute(f"CREATE DATABASE IF NOT EXISTS {os.environ['DB_DATABASE']}")
             connection.commit()
             connection.close()
