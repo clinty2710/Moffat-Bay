@@ -78,9 +78,4 @@ def create_tables():
         except Exception as e:
             print("Error:", e)
 
-# Import views after initializing app and db
-from app import views
 
-if __name__ == "__main__":
-    create_tables()  # Initialize the database tables
-    app.run()
