@@ -1,13 +1,22 @@
-# Moffat-Bay
-CSD 460 Capstone
+# Moffat-Bay CSD 460 Capstone
 
-#setup and run
-You MUST change the "CHANGE_ME.env" to match your own database username and password.
-afterwards, rename it to simply ".env"
+## Setup and Run
 
-then to run the project you will need to run:
-pip install -r requirements.txt
-and then:
-python run.py
+1. **Configuration**: Before you start, make sure to update the `CHANGE_ME.env` file with your database username and password. Once updated, rename the file to `.env`.
 
-This will initialize the db and run flask locally.
+2. **Installation**: To run the project, follow these steps:
+
+   a. Install the required packages:
+      ```
+      pip install -r requirements.txt
+      ```
+
+   b. Initialize the Database: Run the following command to set up the database and tables:
+      ```
+      python run.py
+      ```
+
+3. **Running the Project**: After completing the steps above, you can now run the Flask application locally:
+      ```
+      python run.py
+      ```
