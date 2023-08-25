@@ -8,7 +8,7 @@
 
    a. Install the required packages:
       ```
-      pip install -r requirements.txt
+      cc
       ```
 
    b. Initialize the Database: Run the following command to set up the database and tables:
