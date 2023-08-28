@@ -1,4 +1,4 @@
-from flask import render_template, render_template, redirect, request, url_for, flash
+from flask import render_template, render_template, redirect, request, url_for, flash, session
 from markupsafe import Markup
 from app import app, User, Reservation, db
 from wtforms import StringField, PasswordField, SubmitField
@@ -56,8 +56,6 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -67,8 +65,22 @@ def login():
 
         if user and bcrypt.checkpw(form.password.data.encode('utf-8'), user.Password.encode('utf-8')):
             flash('Login successful!', 'success')
+            session['user_id'] = user.uid  # Store user's ID in the session
             return redirect(url_for('index'))
         else:
             flash('Login failed. Please check your email and password.', 'danger')
     return render_template('login.html', form=form)
 
+@app.context_processor
+def inject_user():
+    user_id = session.get('user_id')
+    if user_id:
+        user = User.query.get(user_id)
+        return dict(user=user)
+    return dict(user=None)
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)  # Remove user's ID from the session
+    flash('Logged out successfully!', 'info')
+    return redirect(url_for('index'))
