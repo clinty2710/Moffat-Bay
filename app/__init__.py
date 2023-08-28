@@ -1,6 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from flask_wtf import CSRFProtect
+
+from flask_bootstrap import Bootstrap
+import secrets
+
+
 import os
 import pymysql
 
@@ -8,6 +14,9 @@ import pymysql
 load_dotenv()
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+csrf = CSRFProtect(app)
+app.secret_key = secrets.token_hex(16)
 
 # Configure the database connection URI
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql://{os.environ['DB_USER']}:{os.environ['DB_PASSWORD']}@{os.environ['DB_HOST']}/{os.environ['DB_DATABASE']}"
@@ -33,7 +42,7 @@ class Reservation(db.Model):
     room_number = db.Column(db.String(10))
     num_of_guests = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.uid'))  # Foreign key to User table
-                            
+
 # Function to create tables and insert sample data
 def create_tables():
     with app.app_context():
