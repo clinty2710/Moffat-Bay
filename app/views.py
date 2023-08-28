@@ -6,6 +6,9 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length
 from flask_wtf import FlaskForm
 import bcrypt
 
+#generate salt
+salt = bcrypt.gensalt()
+
 class RegistrationForm(FlaskForm):
     First_name = StringField('First Name', validators=[DataRequired()])
     Last_name = StringField('Last Name', validators=[DataRequired()])
@@ -38,7 +41,6 @@ def register():
         flash('Account created successfully!', 'success')
         
         # Generate a salt and hash the password before saving to the database
-        salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(form.Password.data.encode('utf-8'), salt)
         
         # Create a new user and save to the database
@@ -53,6 +55,7 @@ def register():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
