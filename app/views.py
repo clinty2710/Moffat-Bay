@@ -36,20 +36,24 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         flash('Account created successfully!', 'success')
-        # Hash the password before saving to the database
-        hashed_password = bcrypt.hashpw(form.Password.data.encode('utf-8'), bcrypt.gensalt())
+        
+        # Generate a salt and hash the password before saving to the database
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(form.Password.data.encode('utf-8'), salt)
+        
         # Create a new user and save to the database
         new_user = User(
             Email=form.Email.data,
             First_name=form.First_name.data,
             Last_name=form.Last_name.data,
             Phone_number=form.Phone_number.data,
-            Password=form.Password.data
+            Password=hashed_password  # Save the hashed password
         )
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
