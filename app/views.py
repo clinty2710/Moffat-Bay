@@ -1,5 +1,4 @@
 from flask import render_template, render_template, redirect, request, url_for, flash, session
-from markupsafe import Markup
 from app import app, User, Reservation, db
 from app.forms import LoginForm, RegistrationForm
 import bcrypt
