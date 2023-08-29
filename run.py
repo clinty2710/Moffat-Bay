@@ -14,6 +14,11 @@ if __name__ == "__main__":
     #set debug mode
     if args.debug:
         app.debug = True
+        app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+        app.config['DEBUG_TB_PROFILER_ENABLED'] = True
+        app.config['DEBUG_TB_TEMPLATE_EDITOR_ENABLED'] = True
+        app.config['SQLALCHEMY_RECORD_QUERIES'] = True
+        app.config['SQLALCHEMY_ECHO'] = True
     else:
         app.debug = False
 
