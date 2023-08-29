@@ -1,28 +1,21 @@
 from flask import render_template, render_template, redirect, request, url_for, flash, session
 from markupsafe import Markup
 from app import app, User, Reservation, db
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, Length
-from flask_wtf import FlaskForm
+from app.forms import LoginForm, RegistrationForm
 import bcrypt
+
 
 #generate salt
 salt = bcrypt.gensalt()
 
-class RegistrationForm(FlaskForm):
-    First_name = StringField('First Name', validators=[DataRequired()])
-    Last_name = StringField('Last Name', validators=[DataRequired()])
-    Email = StringField('Email', validators=[DataRequired(), Email()])
-    Phone_number = StringField('Phone Number', validators=[DataRequired()])
-    Password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
-    Confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('Password')])
-    submit = SubmitField('Register')
-
-
-class LoginForm(FlaskForm):
-    username = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Login')
+#session key for user logged in
+@app.context_processor
+def inject_user():
+    user_id = session.get('user_id')
+    if user_id:
+        user = User.query.get(user_id)
+        return dict(user=user)
+    return dict(user=None)
 
 @app.route("/")
 def index():
@@ -70,14 +63,6 @@ def login():
         else:
             flash('Login failed. Please check your email and password.', 'danger')
     return render_template('login.html', form=form)
-
-@app.context_processor
-def inject_user():
-    user_id = session.get('user_id')
-    if user_id:
-        user = User.query.get(user_id)
-        return dict(user=user)
-    return dict(user=None)
 
 @app.route('/logout')
 def logout():
