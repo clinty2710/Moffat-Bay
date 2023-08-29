@@ -7,7 +7,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run the Flask app')
     parser.add_argument('--init', action='store_true', help='Initialize the database')
     #add debug option
-    parser.add_argument('--debug', action='store_true', help='Run in debug mode')
+    parser.add_argument('--debug', action='store_true', help='Run in debug mode, with toolbar')
     args = parser.parse_args()
     if args.init:
         create_tables()  # Initialize the database tables
