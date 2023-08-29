@@ -3,10 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_wtf import CSRFProtect
 from flask_caching import Cache
-from flask_debugtoolbar import DebugToolbarExtension 
 from flask_bootstrap import Bootstrap
-import secrets
-
 
 import os
 import pymysql
@@ -15,15 +12,10 @@ import pymysql
 load_dotenv()
 
 app = Flask(__name__)
-app.debug = True
-app.config['SECRET_KEY'] = 'TheQuickBrownFoxJumpsOverTheLazyDog'
 cache = Cache(config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': 300})  # Set a timeout (in seconds)
 cache.init_app(app)
 bootstrap = Bootstrap(app)
 csrf = CSRFProtect(app)
-app.secret_key = secrets.token_hex(16)
-toolbar = DebugToolbarExtension(app)
-
 
 # Configure the database connection URI
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql://{os.environ['DB_USER']}:{os.environ['DB_PASSWORD']}@{os.environ['DB_HOST']}/{os.environ['DB_DATABASE']}"

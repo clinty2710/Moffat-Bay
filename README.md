@@ -13,10 +13,15 @@
 
    b. Initialize the Database: Run the following command to set up the database and tables:
       ```
-      python run.py
+      python run.py --init
       ```
 
 3. **Running the Project**: After completing the steps above, you can now run the Flask application locally:
+   a. To run the project without debug mode:
       ```
       python run.py
+      ```
+   b. To run the project with debug mode turned on, and the toolbar activated:
+      ```
+      python run.py --debug
       ```
