@@ -36,6 +36,7 @@ h1 {
     color: #666;
     text-decoration: none;
     transition: color 0.3s;
+    padding-left: 5px;
 }
 
 .list-unstyled a:hover, .home-link a:hover {
