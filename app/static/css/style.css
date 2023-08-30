@@ -5,13 +5,16 @@ h1 {
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Comfortaa', Arial, sans-serif;
   }
   
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
   .row {
@@ -29,21 +32,49 @@ body {
   }
   
   .title-head {
-    background-color: #3498db;
+    background-color: #04B2d9;
+    text-align: center;
+    font-weight: 700;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 300px;
   }
   
   .title {
-    color: #fff;
-    font-size: 24px;
+    color: #47525E;
+    font-size: 70px;
+    margin-bottom: 0px;
   }
+
+  .title-line1 {
+    font-size: 80px; /* Increase font size for emphasis */
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold; /* Make the font heavier */
+}
+
+.action-call {
+    font-size: 18px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the font heavier */
+    margin-top: 20px; /* Add some space between title and action */
+}
+
+.action-link {
+    color: #04B2d9;
+    text-decoration: underline;
+}
+
+.action-link:hover {
+    color: #0073e6; /* Change link color on hover */
+}
   
   .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 300px;
   }
   
   .image {
@@ -55,12 +86,30 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
   .card {
-    width: calc(50% - 20px);
+    width: calc(50% - 20px); /* Adjust card width to take half the available space */
     margin: 10px;
     background-color: #f8f9fa;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .card .bg-image {
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .card .img-fluid {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
   }
   
   .card-body {
@@ -75,7 +124,7 @@ body {
   .card-text {
     font-size: 16px;
     margin: 5px 0;
-  }
+  }  
   
 /* Footer */
 .footer {
