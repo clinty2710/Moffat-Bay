@@ -49,16 +49,16 @@ body {
   }
 
   .title-line1 {
-    font-size: 80px; /* Increase font size for emphasis */
+    font-size: 80px;
     display: inline-block;
     margin-right: 10px;
-    font-weight: bold; /* Make the font heavier */
+    font-weight: bold; 
 }
 
 .action-call {
-    font-size: 18px; /* Adjust font size as needed */
-    font-weight: bold; /* Make the font heavier */
-    margin-top: 20px; /* Add some space between title and action */
+    font-size: 18px; 
+    font-weight: bold; 
+    margin-top: 20px; 
 }
 
 .action-link {
@@ -67,7 +67,7 @@ body {
 }
 
 .action-link:hover {
-    color: #0073e6; /* Change link color on hover */
+    color: #0073e6; 
 }
   
   .image-container {
@@ -84,7 +84,8 @@ body {
   
   .card-columns {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; 
+    gap: 150px; 
     padding: 20px;
     width: 100%;
     max-width: 1200px;
@@ -92,7 +93,8 @@ body {
   }
   
   .card {
-    width: calc(50% - 20px); /* Adjust card width to take half the available space */
+    flex: 1;
+    max-width: calc(33.33% - 20px); 
     margin: 10px;
     background-color: #f8f9fa;
     overflow: hidden;
