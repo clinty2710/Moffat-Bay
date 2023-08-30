@@ -1,6 +1,46 @@
 h1 {
     text-decoration: important;
 }
+/* Landing Page */
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    background-color: #3498db;
+    padding: 10px;
+  }
+  .title {
+    color: #fff;
+    font-size: 24px;
+    margin-right: 20px;
+  }
+  .image-container {
+    flex: 1;
+  }
+  .image {
+    width: 100%;
+    display: block;
+  }
+  .columns {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  .column {
+    flex: 1;
+    padding: 0 10px;
+  }
+  .caption {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+/* Footer */
 .footer {
     background-color: #f8f9fa;
     padding: 20px 0;
@@ -19,17 +59,17 @@ h1 {
 
 .link-columns {
     display: flex;
-    justify-content: center; /* Center the columns horizontally */
+    justify-content: center; 
     align-items: center;
     margin: 10px 5em;
 }
 
 .link-columns ul {
-    margin: 0; /* Reset margin for the lists */
+    margin: 0; 
 }
 
 .link-columns ul li {
-    margin-bottom: 10px; /* Increase the space between list items */
+    margin-bottom: 10px; 
 }
 
 .list-unstyled a, .home-link a {
