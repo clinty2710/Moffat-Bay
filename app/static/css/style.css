@@ -2,7 +2,7 @@ h1 {
     text-decoration: important;
 }
 /* Landing Page */
-body {
+  body {
     margin: 0;
     padding: 0;
     font-family: 'Comfortaa', Arial, sans-serif;
@@ -53,22 +53,22 @@ body {
     display: inline-block;
     margin-right: 10px;
     font-weight: bold; 
-}
+  }
 
-.action-call {
+  .action-call {
     font-size: 18px; 
     font-weight: bold; 
     margin-top: 20px; 
-}
+  }
 
-.action-link {
-    color: #04B2d9;
+  .action-link {
+    color: #055902;
     text-decoration: underline;
-}
+  }
 
-.action-link:hover {
-    color: #0073e6; 
-}
+  .action-link:hover {
+    color: #C0d904; 
+  }
   
   .image-container {
     display: flex;
