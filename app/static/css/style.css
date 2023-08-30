@@ -1,3 +1,51 @@
 h1 {
     text-decoration: important;
 }
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer h4 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.centered {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.link-columns {
+    display: flex;
+    justify-content: center; /* Center the columns horizontally */
+    align-items: center;
+    margin: 10px 5em;
+}
+
+.link-columns ul {
+    margin: 0; /* Reset margin for the lists */
+}
+
+.link-columns ul li {
+    margin-bottom: 10px; /* Increase the space between list items */
+}
+
+.list-unstyled a, .home-link a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.list-unstyled a:hover, .home-link a:hover {
+    color: #333;
+}
+
+.social-icons-left,
+.social-icons-right {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px;
+    size: large;
+}
