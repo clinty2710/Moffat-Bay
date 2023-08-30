@@ -13,7 +13,7 @@
         </div>              
         <div class="col-md-4">
           <div class="image-container">
-            <img src="your-lodge-image.jpg" alt="Moffat Bay Lodge" class="image">
+            <img src="{{ url_for('static', filename='images/lodge.jpg') }}" alt="Moffat Bay Lodge" class="image">
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
     <div class="card-columns">
         <div class="card text-center ">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="https://mdbootstrap.com/img/new/standard/nature/111.webp" class="img-fluid" />
+              <img src="{{ url_for('static', filename='images/kayak.jpg') }}" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
               </a>
@@ -60,7 +60,7 @@
     <div class="card-columns">
         <div class="card text-center ">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="https://mdbootstrap.com/img/new/standard/nature/111.webp" class="img-fluid" />
+              <img src="{{ url_for('static', filename='images/whalewatching.jpeg') }}" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
               </a>
@@ -77,7 +77,7 @@
           </div>
           <div class="card text-center ">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="https://mdbootstrap.com/img/new/standard/nature/111.webp" class="img-fluid" />
+              <img src="{{ url_for('static', filename='images/hiking.jpg') }}" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
               </a>
