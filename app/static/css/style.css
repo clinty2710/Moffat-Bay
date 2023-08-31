@@ -141,6 +141,7 @@ h1 {
 /* Footer */
 .footer {
     background-color: hsl(192, 85%, 90%);
+    margin-top: 20px;
     padding: 5px 0;
     text-align: center;
 }
