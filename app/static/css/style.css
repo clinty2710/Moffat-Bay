@@ -2,11 +2,18 @@ h1 {
     text-decoration: important;
 }
 /* Landing Page */
+  .head {
+    background-color: #04B2D9;
+  }
   body {
     margin: 0;
     padding: 0;
     font-family: 'Comfortaa', Arial, sans-serif;
+    background-color: #04B2D9;
   }
+  .lightened-body {
+    background-color: hsl(192, 85%, 90%);
+}
   
   .container {
     display: flex;
@@ -131,7 +138,7 @@ h1 {
   
 /* Footer */
 .footer {
-    background-color: #f8f9fa;
+    background-color: hsl(192, 85%, 90%);
     padding: 20px 0;
     text-align: center;
 }
