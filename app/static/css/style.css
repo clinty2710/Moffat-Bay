@@ -199,3 +199,8 @@ h1 {
     background-clip: text;
     -webkit-background-clip: text;
   }
+  .required-field::before {
+    content: '*';
+    color: red;
+    margin-right: 4px; /* Add spacing between asterisk and label text */
+}
