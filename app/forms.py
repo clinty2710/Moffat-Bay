@@ -16,4 +16,8 @@ class RegistrationForm(FlaskForm):
     Confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('Password')])
     submit = SubmitField('Register')
 
+class ForgotPasswordForm(FlaskForm):
+    Email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Reset Password')
+
 
