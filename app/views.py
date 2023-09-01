@@ -1,6 +1,6 @@
 from flask import render_template, render_template, redirect, request, url_for, flash, session
 from app import app, User, Reservation, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, ForgotPasswordForm
 import bcrypt
 
 
@@ -56,12 +56,27 @@ def login():
         user = User.query.filter_by(Email=form.username.data).first()
 
         if user and bcrypt.checkpw(form.password.data.encode('utf-8'), user.Password.encode('utf-8')):
-            flash('Login successful!', 'success')
             session['user_id'] = user.uid  # Store user's ID in the session
+            flash('Logged in successfully!', 'info')
             return redirect(url_for('index'))
         else:
             flash('Login failed. Please check your email and password.', 'danger')
     return render_template('login.html', form=form)
+
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        user = User.query.filter_by(Email=request.form['Email']).first()
+        if user:
+            flash('Please check your email for a password reset link.', 'info')
+            return redirect(url_for('index'))
+        else:
+            flash('Email address not found.', 'danger')
+            return redirect(url_for('forgot_password'))
+    else:
+        form = ForgotPasswordForm()
+        flash('Please enter your email address.', 'info')
+        return render_template('forgot_password.html', form=form)
 
 @app.route('/logout')
 def logout():
