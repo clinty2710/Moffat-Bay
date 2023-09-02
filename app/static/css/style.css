@@ -18,7 +18,15 @@ h1 {
   .navbar-brand {
     padding-left: 20px; 
     padding-right: 20px; 
-}
+  }
+  .navbar-nav li.nav-item:not(.navbar-brand) a:hover {
+    background-color: #c0d904;
+    color: #055902;
+  }
+  .navbar-nav li.nav-item:not(.navbar-brand) a:active {
+    background-color: #000;
+    color: white;
+  }
 
 
   
