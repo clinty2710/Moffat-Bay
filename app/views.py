@@ -83,3 +83,9 @@ def logout():
     session.pop('user_id', None)  # Remove user's ID from the session
     flash('Logged out successfully!', 'info')
     return redirect(url_for('index'))
+
+@app.route('/profile')
+def profile():
+    user = User.query.filter_by(uid=session['user_id']).first()
+    
+    return render_template('profile.html', user=user)
