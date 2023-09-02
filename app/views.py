@@ -1,6 +1,6 @@
 from flask import render_template, render_template, redirect, request, url_for, flash, session
 from app import app, User, Reservation, db
-from app.forms import LoginForm, RegistrationForm, ForgotPasswordForm
+from app.forms import LoginForm, RegistrationForm, ForgotPasswordForm, UpdateProfile
 import bcrypt
 
 
@@ -84,8 +84,31 @@ def logout():
     flash('Logged out successfully!', 'info')
     return redirect(url_for('index'))
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
     user = User.query.filter_by(uid=session['user_id']).first()
-    
-    return render_template('profile.html', user=user)
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        # Update the user's information based on the form data
+        user.Email = form.Email.data
+        user.First_name = form.First_name.data
+        user.Last_name = form.Last_name.data
+        user.Phone_number = form.Phone_number.data
+
+        # Check if a new password is provided and update it if necessary
+        new_password = form.Password.data
+        if new_password:
+            user.Password = bcrypt.hashpw(new_password.encode.encode('utf-8'), salt)
+
+        # Save the changes to the database
+        db.session.commit()
+        flash('Profile updated successfully!', 'success')
+    # Prepopulate the form fields with the user's current information
+    form.Email.data = user.Email
+    form.First_name.data = user.First_name
+    form.Last_name.data = user.Last_name
+    form.Phone_number.data = user.Phone_number
+
+    return render_template('profile.html', form=form, user=user)
+

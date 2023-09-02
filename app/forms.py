@@ -20,4 +20,12 @@ class ForgotPasswordForm(FlaskForm):
     Email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Reset Password')
 
+class UpdateProfile(FlaskForm):
+    First_name = StringField('First Name', validators=[DataRequired()])
+    Last_name = StringField('Last Name', validators=[DataRequired()])
+    Email = StringField('Email', validators=[DataRequired(), Email()])
+    Phone_number = StringField('Phone Number', validators=[DataRequired()])
+    Password = PasswordField('Password', validators=[Length(min=8)] )
+    submit = SubmitField('Update Profile')
+
 

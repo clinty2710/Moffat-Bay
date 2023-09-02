@@ -3,10 +3,29 @@
 {% block title %} Profile {% endblock %}
 
 {% block content %}
-    <h2>Account</h2>
-    <p>Email: {{ user.Email }}</p>
-    <p>First Name: {{ user.First_name }}</p>
-    <p>Last Name: {{ user.Last_name }}</p>
-    <p>Phone Number: {{ user.Phone_number }}</p>
-    
+    <h2>Edit Profile</h2>
+    <form method="POST" action="/profile">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.First_name.label(class="form-label") }}
+            {{ form.First_name(class="form-control", placeholder="First Name") }}
+        </div>
+        <div class="form-group">
+            {{ form.Last_name.label(class="form-label") }}
+            {{ form.Last_name(class="form-control", placeholder="Last Name") }}
+        </div>
+        <div class="form-group">
+            {{ form.Email.label(class="form-label") }}
+            {{ form.Email(class="form-control", placeholder="Email") }}
+        </div>
+        <div class="form-group">
+            {{ form.Phone_number.label(class="form-label") }}
+            {{ form.Phone_number(class="form-control", placeholder="Phone Number") }}
+        </div>
+        <div class="form-group">
+            {{ form.Password.label(class="form-label") }}
+            {{ form.Password(class="form-control", placeholder="Password") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
 {% endblock %}
