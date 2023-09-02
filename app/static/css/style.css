@@ -2,7 +2,7 @@
 /* base Page */
 h1 {
     text-decoration: important;
-}
+  }
   .head {
     background-color: #04B2D9;
   }
@@ -14,7 +14,21 @@ h1 {
   }
   .lightened-body {
     background-color: hsl(192, 85%, 90%);
-}
+  }
+  .navbar-brand {
+    padding-left: 20px; 
+    padding-right: 20px; 
+  }
+  .navbar-nav li.nav-item:not(.navbar-brand) a:hover {
+    background-color: #c0d904;
+    color: #055902;
+  }
+  .navbar-nav li.nav-item:not(.navbar-brand) a:active {
+    background-color: #000;
+    color: white;
+  }
+
+
   
 /* Landing Page */
   .container {
@@ -65,9 +79,10 @@ h1 {
   }
 
   .action-call {
-    font-size: 18px; 
+    font-size: 30px; 
     font-weight: bold; 
-    margin-top: 20px; 
+    margin-top: 20px;
+    text-align: center;
   }
 
   .action-link {
@@ -141,6 +156,7 @@ h1 {
 /* Footer */
 .footer {
     background-color: hsl(192, 85%, 90%);
+    margin-top: 20px;
     padding: 5px 0;
     text-align: center;
 }
@@ -202,5 +218,5 @@ h1 {
   .required-field::before {
     content: '*';
     color: red;
-    margin-right: 4px; /* Add spacing between asterisk and label text */
+    margin-right: 4px; 
 }
