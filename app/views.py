@@ -90,6 +90,7 @@ def profile():
     form = UpdateProfile()
 
     if request.method == 'POST':
+
         form = UpdateProfile(request.form)
         new_password = form.Password.data
         if new_password:
@@ -106,7 +107,6 @@ def profile():
         # Save the changes to the database
         db.session.commit()
         flash('Profile updated successfully!', 'success')
-
     form.Email.data = user.Email
     form.First_name.data = user.First_name
     form.Last_name.data = user.Last_name
