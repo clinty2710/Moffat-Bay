@@ -89,26 +89,29 @@ def profile():
     user = User.query.filter_by(uid=session['user_id']).first()
     form = UpdateProfile()
 
-    if form.validate_on_submit():
+    if request.method == 'POST':
+        form = UpdateProfile(request.form)
+        new_password = form.Password.data
+        if new_password:
+            # Hash the new password and store it securely
+            hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+            user.Password = hashed_password
+
         # Update the user's information based on the form data
         user.Email = form.Email.data
         user.First_name = form.First_name.data
         user.Last_name = form.Last_name.data
         user.Phone_number = form.Phone_number.data
 
-        # Check if a new password is provided and update it if necessary
-        new_password = form.Password.data
-        if new_password:
-            user.Password = bcrypt.hashpw(new_password.encode.encode('utf-8'), salt)
-
         # Save the changes to the database
         db.session.commit()
         flash('Profile updated successfully!', 'success')
-    # Prepopulate the form fields with the user's current information
+
     form.Email.data = user.Email
     form.First_name.data = user.First_name
     form.Last_name.data = user.Last_name
     form.Phone_number.data = user.Phone_number
 
     return render_template('profile.html', form=form, user=user)
+
 
