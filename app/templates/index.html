@@ -5,7 +5,15 @@
 {% block content %}
 
 <div class="container">
-  <div class="blank-space"></div>
+
+    <div class="row content-center">
+        <div class="col-md-8 offset-md-2">
+            <div class="maintxt" style="background-image: url({{ url_for('static', filename='images/lodge.jpg') }})">
+                <span class="title-line1">Moffat Bay Lodge</span>
+            </div>
+        </div>
+    </div>
+</div>
   <p class="action-call">
         Welcome to your next vacation<br>
         Book your dream stay <a href="#" class="action-link">now!</a>

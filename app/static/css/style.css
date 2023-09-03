@@ -224,7 +224,12 @@ h1 {
     color: red;
     margin-right: 4px; 
 }
-.image-container {
-    position: relative;
-    margin-left: -50px; 
+.maintxt {
+    background-size: cover;
+    height: 400px;
+    text-align: right;
+    max-width: 800px;
+    color:white;
+    display:inline-block;
+    float:none;
 }
