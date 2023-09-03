@@ -5,17 +5,22 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
-        <div class="image-container">
-            <img src="{{ url_for('static', filename='images/lodge.jpg') }}" alt="Moffat Bay Lodge" class="image">
-        </div>
-        <div class="title-head">
-            <div class="title">
-                <span class="title-line1">Moffat Bay<br>Lodge</span>
-            </div>
-        </div>              
+  <div class="row">
+    <div class="col-md-6">
+      <div class="title-head">
+          <div class="title">
+              <span class="title-line1">Moffat Bay<br>Lodge</span>
+          </div>
+      </div>
     </div>
-      <p class="action-call">
+    <div class="col-md-6">
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/lodge.jpg') }}" alt="Moffat Bay Lodge" class="img-fluid">
+        </div>
+    </div>
+  </div>
+  <div class="blank-space"></div>
+  <p class="action-call">
         Welcome to your next vacation<br>
         Book your dream stay <a href="#" class="action-link">now!</a>
       </p>

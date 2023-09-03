@@ -97,8 +97,6 @@ h1 {
     margin-right: 10px;
     font-weight: bold;
 }
-
-
 .action-call {
     font-size: 30px;
     font-weight: bold;
@@ -231,4 +229,30 @@ h1 {
     content: '*';
     color: red;
     margin-right: 4px; 
+}
+.image-container {
+    position: relative;
+    margin-left: -50px; 
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.title-head {
+    position: relative;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 20px;
+    color: #fff; 
+    text-align: center;
+    z-index: 1;
+}
+.blank-space {
+    height: 60px;
 }
