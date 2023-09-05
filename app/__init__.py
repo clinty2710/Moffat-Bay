@@ -1,3 +1,9 @@
+#    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+#    CSD460 Capstone Project
+#
+#    __init__.py
+
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv

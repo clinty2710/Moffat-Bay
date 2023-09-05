@@ -1,3 +1,8 @@
+#    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+#    CSD460 Capstone Project
+#
+#    views.py
+
 from flask import render_template, render_template, redirect, request, url_for, flash, session
 from app import app, User, Reservation, db
 from app.forms import LoginForm, RegistrationForm, ForgotPasswordForm, UpdateProfile

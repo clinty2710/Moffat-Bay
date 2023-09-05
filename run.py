@@ -1,3 +1,8 @@
+#    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+#    CSD460 Capstone Project
+#
+#    run.py
+
 from app import app, create_tables
 import argparse
 from flask_debugtoolbar import DebugToolbarExtension 

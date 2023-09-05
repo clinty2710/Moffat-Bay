@@ -1,3 +1,14 @@
+/*  Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    CSD460 Capstone Project
+
+    style.css
+image sources:
+hiking.jpg - https://www.nps.gov/grte/planyourvisit/hike.htm
+whalewatching.png - https://www.newzealand.com/int/whale-watching/
+kayak.jpg - https://www.viator.com/tours/Interlaken/Kayak-Tour-of-the-Turquoise-Lake-Brienz/d5011-64859P2
+scuba.png - https://blog.wa.aaa.com/travel/getaways/washingtons-best-dives/
+lodge.jpg - 
+*/
 
 /* base Page */
 h1 {
@@ -155,8 +166,6 @@ h1 {
     margin: 5px 0;
 }
 
-
-  
 /* Footer */
 .footer {
     background-color: hsl(192, 85%, 90%);
