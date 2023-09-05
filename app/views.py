@@ -114,4 +114,11 @@ def profile():
 
     return render_template('profile.html', form=form, user=user)
 
+@app.route('/new_reservation', methods=['GET', 'POST'])
+def new_reservation():
+    if request.method == 'POST':
+        pass
+    else:
+        pass
+    return render_template('reservation.html')
 

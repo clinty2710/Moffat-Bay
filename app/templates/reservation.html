@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Reservation {% endblock %}
+{% block content %}
+<h1>Reservation</h1>
+<div class="container">
+    <div  class="w-75">
+        <img src="{{ url_for('static', filename='images/hotellayout.png') }}" alt="Hotel Layout" class="img-fluid" usemap="#image-map" id="responsive-image">
+        <map name="image-map">
+            <area alt="1a" title="1a" href="1a" coords="59,45,160,150" shape="rect">
+        </map>
+    </div>
+</div>
+
+
+{% endblock %}
