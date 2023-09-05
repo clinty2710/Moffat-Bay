@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %} Reservation {% endblock %}
+{% block title %} Reservations {% endblock %}
 {% block content %}
 <h1>Reservation</h1>
 <div class="container">
     <div  class="w-75">
         <img src="{{ url_for('static', filename='images/hotellayout.png') }}" alt="Hotel Layout" class="img-fluid" usemap="#image-map" id="responsive-image">
         <map name="image-map">
+            <!-- Non-smoking 1a-1d-->
             <area alt="1a" title="1a" href="1a" coords="59,45,160,150" shape="rect">
             <area alt="1b" title="1b" href="1b" coords="169,45,270,150" shape="rect">
             <area alt="1c" title="1c" href="1c" coords="275,45,370,150" shape="rect">
             <area alt="1d" title="1d" href="1d" coords="335,45,475,150" shape="rect">
+            <!-- Smoking 1e-1h-->
+            <area alt="1e" title="1e" href="1e" coords="480,45,580,150" shape="rect">
+            <area alt="1f" title="1f" href="1f" coords="585,45,680,150" shape="rect">
+            <area alt="1g" title="1g" href="1g" coords="685,45,780,150" shape="rect">
+            <area alt="1h" title="1h" href="1h" coords="785,45,890,150" shape="rect">
+            <!-- Non-smoking 2a-2d-->
         </map>
     </div>
 </div>
