@@ -10,8 +10,8 @@ setTimeout(function() {
 $(document).ready(function() {
   // Function to update area coordinates based on the current image size
   function updateAreaCoordinates() {
-    var imageWidth = $('#responsive-image').width();
-    var imageHeight = $('#responsive-image').height();
+    var imageWidth = $('#hotel-image').width();
+    var imageHeight = $('#hotel-image').height();
 
     // Calculate new coordinates for each area
     $('map[name="image-map"] area').each(function() {
@@ -24,7 +24,7 @@ $(document).ready(function() {
   }
 
   // Save original image dimensions
-  var originalImageWidth = $('#responsive-image').width();
+  var originalImageWidth = $('#hotel-image').width();
   
   // Store original coordinates as data attribute for each area
   $('map[name="image-map"] area').each(function() {
