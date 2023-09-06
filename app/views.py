@@ -153,11 +153,10 @@ def confirm_reservation():
         )
         db.session.add(new_reservation)
         db.session.commit()
-        
+
         flash('Reservation added successfully!', 'success')
         return redirect(url_for('index'))
     else:
-        print(form.errors)
         flash('Reservation failed. Please check your information and try again.', 'danger')
         return redirect(url_for('new_reservation'))
 
