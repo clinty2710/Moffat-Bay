@@ -11,7 +11,7 @@
 {% block content %}
 <h1>Reservations</h1>
 <div class="container">
-    <div  class="w-75">
+    <div class="w-75">
         <img src="{{ url_for('static', filename='images/hotellayout.png') }}" alt="Hotel Layout" class="img-fluid" usemap="#image-map" id="hotel-image">
         <map name="image-map">
             <!-- Non-smoking 1a-1d-->
@@ -70,6 +70,13 @@
         </div>
       </form>
 </div>
+<script type="text/javascript" src="scripts/jquery.imagemapster.js">
 
-
+$(document).ready(function() {
+    $('img').mapster({
+        fillColor: 'ff0000', // Your desired fill color (#055902)
+        fillOpacity: 0.3 // You can also set fillOpacity if needed
+    });
+});
+</script>
 {% endblock %}
