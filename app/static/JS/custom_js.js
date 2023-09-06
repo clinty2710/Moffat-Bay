@@ -180,10 +180,14 @@ $(document).ready(function () {
   });
 
   function updateImageMap(unavailableRooms) {
+    var roomsToHighlight = [];
+  
     for (var i = 0; i < unavailableRooms.length; i++) {
-      unavailableRooms[i] = 'room_' + unavailableRooms[i];
-      image.mapster('set', true, unavailableRooms[i]);
-      console.log(unavailableRooms[i]);
+      roomsToHighlight.push('room_' + unavailableRooms[i]);
     }
+  
+    image.mapster('set', true, roomsToHighlight);
+    console.log(roomsToHighlight);
   }
+  
 });
