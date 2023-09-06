@@ -134,20 +134,30 @@ def new_reservation():
 @app.route('/confirm_reservation', methods=['POST'])
 def confirm_reservation():
     form = NewReservation(request.form)
+
     if form.validate_on_submit():
+        # The form data is valid, so you can proceed with creating the reservation
+        # Extract the data from the form
+        room_number = form.room_number.data
+        start_date = form.start_date.data
+        end_date = form.end_date.data
+        num_of_guests = form.num_of_guests.data
+
         # Create a new reservation and save to the database
         new_reservation = Reservation(
-            room_number=form.room_number.data,
-            start_date=form.start_date.data,
-            end_date=form.end_date.data,
-            num_of_guests=form.num_of_guests.data,
-            user_id=session['user_id']  # Store the user's ID in the reservation
+            room_number=room_number,
+            start_date=start_date,
+            end_date=end_date,
+            num_of_guests=num_of_guests,
+            user_id=session['user_id']
         )
         db.session.add(new_reservation)
         db.session.commit()
-        flash('Reservation created successfully!', 'success')
+        
+        flash('Reservation added successfully!', 'success')
         return redirect(url_for('index'))
     else:
+        print(form.errors)
         flash('Reservation failed. Please check your information and try again.', 'danger')
         return redirect(url_for('new_reservation'))
 
