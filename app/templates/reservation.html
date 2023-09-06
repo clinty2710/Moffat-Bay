@@ -36,6 +36,39 @@
             <area alt="2h" title="2h" name="room_2h" href="2h" coords="1305,280,1470,430" shape="rect">
         </map>
     </div>
+    <!-- Reservation form-->
+    <form method="POST" action="/new_reservation">
+        {{ form.hidden_tag() }}
+        
+        <!-- Room Number Select Field -->
+        <div class="form-group">
+          <label for="{{ form.room_number.id }}" class="form-label">Room Choice</label>
+          {{ form.room_number(class="form-select", id=form.room_number.id) }}
+        </div>
+  
+        <!-- Start Date DateField -->
+        <div class="form-group">
+          <label for="{{ form.start_date.id }}" class="form-label">Start Date</label>
+          {{ form.start_date(class="form-control", id=form.start_date.id) }}
+        </div>
+  
+        <!-- End Date DateField -->
+        <div class="form-group">
+          <label for="{{ form.end_date.id }}" class="form-label">End Date</label>
+          {{ form.end_date(class="form-control", id=form.end_date.id) }}
+        </div>
+  
+        <!-- Number of Guests StringField -->
+        <div class="form-group">
+          <label for="{{ form.num_of_guests.id }}" class="form-label">Number of Guests</label>
+          {{ form.num_of_guests(class="form-control", id=form.num_of_guests.id) }}
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="form-group">
+          {{ form.submit(class="btn btn-primary") }}
+        </div>
+      </form>
 </div>
 
 
