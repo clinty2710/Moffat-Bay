@@ -51,7 +51,7 @@ $(document).ready(function () {
     strokeColor: "3320FF",
     strokeOpacity: 0.8,
     strokeWidth: 4,
-    singleSelect: true,
+    singleSelect: false,
     mapKey: 'name',
     listKey: 'name',
     showToolTip: true,

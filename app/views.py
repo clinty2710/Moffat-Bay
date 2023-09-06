@@ -180,7 +180,7 @@ def get_room_availability():
 
     if start_date and end_date:
         reservations = Reservation.query.filter(
-            or_(
+            and_(
                 Reservation.start_date <= start_date,
                 Reservation.end_date >= end_date
             )
