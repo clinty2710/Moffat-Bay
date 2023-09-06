@@ -62,26 +62,54 @@ $(document).ready(function () {
     },
     toolTipClose: ["tooltip-click", "area-click"],
     areas: [
-      {
-        key: "room_1a",
+      { key: "room_1a",
         fillColor: "000000"
       },
-      {
-        key: "room_1b",
+      { key: "room_1b",
         fillColor: "000000"
       },
-      {
-        key: "room_1c",
+      { key: "room_1c",
         fillColor: "000000"
       },
-      {
-        key: "room_1d",
+      { key: "room_1d",
         fillColor: "000000"
       },
-      {
-        key: "room_1e",
+      { key: "room_1e",
         strokeColor: "000000"
-      }
+      },
+      { key: "room_1f",
+        strokeColor: "000000"
+      },
+      { key: "room_1g",
+        strokeColor: "000000"
+      },
+      { key: "room_1h",
+        strokeColor: "000000"
+      },
+      { key: "room_2a",
+        strokeColor: "000000"
+      },
+      { key: "room_2b",
+        strokeColor: "000000"
+      },
+      { key: "room_2c",
+      strokeColor: "000000"
+      },
+      { key: "room_2d",
+      strokeColor: "000000"
+      },
+      { key: "room_2e",
+      strokeColor: "000000"
+      },
+      { key: "room_2f",
+      strokeColor: "000000"
+      },
+      { key: "room_2g",
+      strokeColor: "000000"
+      },
+      { key: "room_2h",
+      strokeColor: "000000"
+      },
     ]
   });
 
@@ -89,7 +117,7 @@ $(document).ready(function () {
     var selectedRoom = $(this).val();
 
     // Deselect all areas first
-    image.mapster('deselect');
+    //image.mapster('deselect');
 
     // Select the area corresponding to the selected room
     image.mapster('set', true, 'room_' + selectedRoom);
@@ -118,12 +146,13 @@ $(document).ready(function () {
   });
 
   function updateImageMap(unavailableRooms) {
+    var roomsToHighlight = [];
+  
     for (var i = 0; i < unavailableRooms.length; i++) {
-      unavailableRooms[i] = 'room_' + unavailableRooms[i];
-      image.mapster('set', true, unavailableRooms[i]);
-      console.log(unavailableRooms[i]);
+      roomsToHighlight.push('room_' + unavailableRooms[i]);
     }
+    console.log(roomsToHighlight)
+  
+    image.mapster('set', true, roomsToHighlight);
   }
 });
-
-
