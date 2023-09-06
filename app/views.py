@@ -151,7 +151,7 @@ def confirm_reservation():
         flash('Reservation failed. Please check your information and try again.', 'danger')
         return redirect(url_for('new_reservation'))
 
-@app.route('show_reservations', methods=['GET'])
+@app.route('/show_reservations', methods=['GET'])
 def show_reservations():
     if not session.get('user_id'):
         flash('Please login to view your reservations.', 'info')
