@@ -56,7 +56,6 @@ $(document).ready(function () {
     listKey: 'name',
     showToolTip: true,
     onClick: function (e) {
-      
       var roomNumber = e.key.replace("room_", "");
       $('#room_number').val(roomNumber);
       console.log(roomNumber);
@@ -95,4 +94,36 @@ $(document).ready(function () {
     // Select the area corresponding to the selected room
     image.mapster('set', true, 'room_' + selectedRoom);
   });
+
+  $('#start_date, #end_date').on('change', function () {
+    // Get the selected start and end dates
+    var startDate = $('#start_date').val();
+    var endDate = $('#end_date').val();
+
+    // Make an AJAX request to the Flask route to get room availability
+    $.ajax({
+      url: '/get_room_availability',
+      type: 'GET',
+      data: { start_date: startDate, end_date: endDate },
+      success: function (response) {
+        var unavailableRooms = response;
+
+        // Update the image map to mark unavailable rooms
+        updateImageMap(unavailableRooms);
+      },
+      error: function (error) {
+        console.error(error);
+      }
+    });
+  });
+
+  function updateImageMap(unavailableRooms) {
+    for (var i = 0; i < unavailableRooms.length; i++) {
+      unavailableRooms[i] = 'room_' + unavailableRooms[i];
+      image.mapster('set', true, unavailableRooms[i]);
+      console.log(unavailableRooms[i]);
+    }
+  }
 });
+
+

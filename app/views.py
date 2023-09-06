@@ -3,7 +3,8 @@
 #
 #    views.py
 
-from flask import render_template, render_template, redirect, request, url_for, flash, session
+from flask import jsonify, render_template, render_template, redirect, request, url_for, flash, session
+from sqlalchemy import and_, or_
 from app import app, User, Reservation, db
 from app.forms import LoginForm, NewReservation, RegistrationForm, ForgotPasswordForm, UpdateProfile
 import bcrypt
@@ -167,3 +168,25 @@ def show_reservations():
         return redirect(url_for('login'))
     reservations = Reservation.query.filter_by(user_id=session['user_id']).all()
     return render_template('show_reservations.html', reservations=reservations)
+
+@app.route('/get_room_availability', methods=['GET'])
+def get_room_availability():
+    if not session.get('user_id'):
+        flash('Please login to view room availability.', 'info')
+        return redirect(url_for('login'))
+
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
+    if start_date and end_date:
+        reservations = Reservation.query.filter(
+            or_(
+                Reservation.start_date <= start_date,
+                Reservation.end_date >= end_date
+            )
+        ).all()
+        unavailable_rooms = [str(r.room_number) for r in reservations]
+
+        return jsonify(unavailable_rooms)
+
+    return jsonify([])
