@@ -62,87 +62,25 @@ $(document).ready(function () {
     },
     toolTipClose: ["tooltip-click", "area-click"],
     areas: [
-      // rooms 1_
       {
         key: "room_1a",
+        fillColor: "000000"
+      },
+      { key: "room_1b",
         fillColor: "c0d904",
         strokeColor: "055902"
       },
-      {
-        key: "room_1b",
+      { key: "room_1c",
         fillColor: "c0d904",
         strokeColor: "055902"
       },
-      {
-        key: "room_1c",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_1d",
+      { key: "room_1d",
         fillColor: "c0d904",
         strokeColor: "055902"
       },
       {
         key: "room_1e",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_1f",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_1g",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_1h",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      // rooms 2_
-      {
-        key: "room_2a",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_2b",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_2c",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_2d",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_2e",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_2f",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_2g",
-        fillColor: "c0d904",
-        strokeColor: "055902"
-      },
-      {
-        key: "room_2h",
-        fillColor: "c0d904",
-        strokeColor: "055902"
+        strokeColor: "000000"
       }
     ]
   });
@@ -151,7 +89,7 @@ $(document).ready(function () {
     var selectedRoom = $(this).val();
 
     // Deselect all areas first
-    image.mapster('deselect');
+    //image.mapster('deselect');
 
     // Select the area corresponding to the selected room
     image.mapster('set', true, 'room_' + selectedRoom);
@@ -180,12 +118,13 @@ $(document).ready(function () {
   });
 
   function updateImageMap(unavailableRooms) {
+    var roomsToHighlight = [];
+  
     for (var i = 0; i < unavailableRooms.length; i++) {
-      unavailableRooms[i] = 'room_' + unavailableRooms[i];
-      image.mapster('set', true, unavailableRooms[i]);
-      console.log(unavailableRooms[i]);
+      roomsToHighlight.push('room_' + unavailableRooms[i]);
     }
+    console.log(roomsToHighlight)
+  
+    image.mapster('set', true, roomsToHighlight);
   }
 });
-
-
