@@ -5,7 +5,7 @@
 
 from flask import render_template, render_template, redirect, request, url_for, flash, session
 from app import app, User, Reservation, db
-from app.forms import LoginForm, RegistrationForm, ForgotPasswordForm, UpdateProfile
+from app.forms import LoginForm, NewReservation, RegistrationForm, ForgotPasswordForm, UpdateProfile
 import bcrypt
 
 
@@ -121,9 +121,40 @@ def profile():
 
 @app.route('/new_reservation', methods=['GET', 'POST'])
 def new_reservation():
+    if not session.get('user_id'):
+        flash('Please login to make a reservation.', 'info')
+        return redirect(url_for('login'))
     if request.method == 'POST':
-        pass
+        form = NewReservation(request.form)
+        return render_template('confirm_reservation.html', form=form)
+    elif request.method == 'GET':
+        form = NewReservation()
+        return render_template('new_reservation.html', form=form)
+    
+@app.route('/confirm_reservation', methods=['POST'])
+def confirm_reservation():
+    form = NewReservation(request.form)
+    if form.validate_on_submit():
+        # Create a new reservation and save to the database
+        new_reservation = Reservation(
+            room_number=form.room_number.data,
+            start_date=form.start_date.data,
+            end_date=form.end_date.data,
+            num_of_guests=form.num_of_guests.data,
+            user_id=session['user_id']  # Store the user's ID in the reservation
+        )
+        db.session.add(new_reservation)
+        db.session.commit()
+        flash('Reservation created successfully!', 'success')
+        return redirect(url_for('index'))
     else:
-        pass
-    return render_template('reservation.html')
+        flash('Reservation failed. Please check your information and try again.', 'danger')
+        return redirect(url_for('new_reservation'))
 
+@app.route('show_reservations', methods=['GET'])
+def show_reservations():
+    if not session.get('user_id'):
+        flash('Please login to view your reservations.', 'info')
+        return redirect(url_for('login'))
+    reservations = Reservation.query.filter_by(user_id=session['user_id']).all()
+    return render_template('show_reservations.html', reservations=reservations)

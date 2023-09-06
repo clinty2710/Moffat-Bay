@@ -1,0 +1,49 @@
+<!--
+    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    CSD460 Capstone Project
+
+-->
+
+{% extends 'base.html' %}
+
+{% block title %} Show Reservations {% endblock %}
+{% block content %}
+    <h1>Reservations</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Customer ID</th>
+                <th>Room ID</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Number of Guests</th>
+                <th>Number of Rooms</th>
+                <th>Number of Nights</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.reservation_id }}</td>
+                    <td>{{ reservation.customer_id }}</td>
+                    <td>{{ reservation.room_id }}</td>
+                    <td>{{ reservation.check_in }}</td>
+                    <td>{{ reservation.check_out }}</td>
+                    <td>{{ reservation.num_guests }}</td>
+                    <td>{{ reservation.num_rooms }}</td>
+                    <td>{{ reservation.num_nights }}</td>
+                    <td>{{ reservation.price }}</td>
+                    <td>
+                        <a href="{{ url_for('reservation_edit', reservation_id=reservation.reservation_id) }}">Edit</a>
+                        <a href="{{ url_for('reservation_delete', reservation_id=reservation.reservation_id) }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('reservation_add') }}">Add Reservation</a>
+
+{% endblock %}

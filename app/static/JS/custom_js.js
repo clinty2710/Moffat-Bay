@@ -40,32 +40,6 @@ $(document).ready(function () {
   // Initial update
   updateAreaCoordinates();
 });
-var xref = {
-  room_1a: "<b>Carrots</b> are delicious and may turn your skin orange!",
-  room_1b: "<b>Asparagus</b> is one of the first vegetables of the spring. " 
-      +"Being a dark green, it's great for you, and has interesting side effects.",
-  room_1c: "<b>Squash</b> is a winter vegetable, and not eaten raw too much. Is that really squash?",
-  room_1d: "<b>Red peppers</b> are actually the same as green peppers, they've just been left on "
-      +"the vine longer. Delicious when fire-roasted.",
-  room_1e: "Similar to red peppers, <b>yellow peppers</b> are sometimes sweeter.",
-  room_1f: "<b>Celery</b> is a fascinating vegetable. Being mostly water, it actually takes your body "
-      +"more calories to process it than it provides.",
-  room_1g: "<b>Cucumbers</b> are cool.",
-  room_1h: "<b>Broccoli</b> is like a forest of goodness in your mouth. And very good for you. "
-  +"Eat lots of broccoli!",
-  room_2a: "<b>Carrots</b> are delicious and may turn your skin orange!",
-  room_2b: "<b>Asparagus</b> is one of the first vegetables of the spring. " 
-  +"Being a dark green, it's great for you, and has interesting side effects.",
-  room_2c: "<b>Squash</b> is a winter vegetable, and not eaten raw too much. Is that really squash?",
-  room_2d: "<b>Red peppers</b> are actually the same as green peppers, they've just been left on "
-  +"the vine longer. Delicious when fire-roasted.",
-  room_2e: "Similar to red peppers, <b>yellow peppers</b> are sometimes sweeter.",
-  room_2f: "<b>Celery</b> is a fascinating vegetable. Being mostly water, it actually takes your body "
-  +"more calories to process it than it provides.",
-  room_2g: "<b>Cucumbers</b> are cool.",
-  room_2h: "<b>Broccoli</b> is like a forest of goodness in your mouth. And very good for you. "
-  +"Eat lots of broccoli!",
-};
 $(document).ready(function() {
   var image = $('#hotel-image');
   image.mapster(
@@ -79,13 +53,16 @@ $(document).ready(function() {
         singleSelect: true,
         mapKey: 'name',
         listKey: 'name',
-
+        onclick: function (e) {
+            $('#select_box').val(e.key);
+            $('#select_box').trigger('change');
+        },
         showToolTip: true,
         toolTipClose: ["tooltip-click", "area-click"],
         areas: [
             {
                 key: "room_1a",
-                fillColor: "ffffff"
+                fillColor: "000000"
             },
             {
                 key: "room_1b",
@@ -101,7 +78,7 @@ $(document).ready(function() {
             },
             {
                 key: "room_1e",
-                strokeColor: "FFFFFF"
+                strokeColor: "000000"
             }
             ]
     });
