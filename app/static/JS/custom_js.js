@@ -7,16 +7,16 @@
 setTimeout(function() {
     $('#flash-messages').fadeOut('slow');
 }, 5000);  // 5000 milliseconds = 5 seconds
-$(document).ready(function() {
+$(document).ready(function () {
   // Function to update area coordinates based on the current image size
   function updateAreaCoordinates() {
     var imageWidth = $('#hotel-image').width();
     var imageHeight = $('#hotel-image').height();
 
     // Calculate new coordinates for each area
-    $('map[name="image-map"] area').each(function() {
+    $('map[name="image-map"] area').each(function () {
       var originalCoords = $(this).data('original-coords').split(',');
-      var scaledCoords = originalCoords.map(function(coord) {
+      var scaledCoords = originalCoords.map(function (coord) {
         return coord * (imageWidth / originalImageWidth);
       });
       $(this).attr('coords', scaledCoords.join(','));
@@ -25,15 +25,15 @@ $(document).ready(function() {
 
   // Save original image dimensions
   var originalImageWidth = $('#hotel-image').width();
-  
+
   // Store original coordinates as data attribute for each area
-  $('map[name="image-map"] area').each(function() {
+  $('map[name="image-map"] area').each(function () {
     var originalCoords = $(this).attr('coords');
     $(this).data('original-coords', originalCoords);
   });
 
   // Update coordinates on window resize
-  $(window).resize(function() {
+  $(window).resize(function () {
     updateAreaCoordinates();
   });
 
@@ -79,11 +79,7 @@ $(document).ready(function() {
         singleSelect: true,
         mapKey: 'name',
         listKey: 'name',
-        onClick: function (e) {
-            // update text depending on area selected
-            $('#selections').html(xref[e.key]);
-  
-        },
+
         showToolTip: true,
         toolTipClose: ["tooltip-click", "area-click"],
         areas: [
