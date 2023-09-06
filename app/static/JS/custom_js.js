@@ -42,6 +42,8 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
   var image = $('#hotel-image');
+
+  // Define your mapster configuration
   image.mapster({
     fillOpacity: 0.4,
     fillColor: "d42e16",
@@ -52,13 +54,13 @@ $(document).ready(function () {
     singleSelect: true,
     mapKey: 'name',
     listKey: 'name',
+    showToolTip: true,
     onClick: function (e) {
       
       var roomNumber = e.key.replace("room_", "");
       $('#room_number').val(roomNumber);
       console.log(roomNumber);
     },
-    showToolTip: true,
     toolTipClose: ["tooltip-click", "area-click"],
     areas: [
       {
@@ -84,4 +86,13 @@ $(document).ready(function () {
     ]
   });
 
+  $('#room_number').on('change', function () {
+    var selectedRoom = $(this).val();
+
+    // Deselect all areas first
+    image.mapster('deselect');
+
+    // Select the area corresponding to the selected room
+    image.mapster('set', true, 'room_' + selectedRoom);
+  });
 });
