@@ -181,10 +181,11 @@ def get_room_availability():
     if start_date and end_date:
         reservations = Reservation.query.filter(
             and_(
-                Reservation.start_date <= start_date,
-                Reservation.end_date >= end_date
+                Reservation.start_date <= end_date,
+                Reservation.end_date >= start_date
             )
         ).all()
+
         unavailable_rooms = [str(r.room_number) for r in reservations]
 
         return jsonify(unavailable_rooms)
