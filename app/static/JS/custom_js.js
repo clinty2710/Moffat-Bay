@@ -65,6 +65,7 @@ $(document).ready(function () {
       {
         key: "room_1a",
         fillColor: "000000"
+        fillColor: "000000"
       },
       { key: "room_1b",
         fillColor: "c0d904",
@@ -81,6 +82,7 @@ $(document).ready(function () {
       {
         key: "room_1e",
         strokeColor: "000000"
+        strokeColor: "000000"
       }
     ]
   });
@@ -89,7 +91,7 @@ $(document).ready(function () {
     var selectedRoom = $(this).val();
 
     // Deselect all areas first
-    //image.mapster('deselect');
+    image.mapster('deselect');
 
     // Select the area corresponding to the selected room
     image.mapster('set', true, 'room_' + selectedRoom);
@@ -118,13 +120,9 @@ $(document).ready(function () {
   });
 
   function updateImageMap(unavailableRooms) {
-    var roomsToHighlight = [];
-  
     for (var i = 0; i < unavailableRooms.length; i++) {
       roomsToHighlight.push('room_' + unavailableRooms[i]);
+      roomsToHighlight.push('room_' + unavailableRooms[i]);
     }
-    console.log(roomsToHighlight)
-  
-    image.mapster('set', true, roomsToHighlight);
   }
 });
