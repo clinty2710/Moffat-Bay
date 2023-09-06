@@ -12,6 +12,7 @@
     <h1> Confirm Reservation </h1>
     <p> Are you sure you want to reserve this room? </p>
     <form action = "/confirm_reservation" method = "post">
+        {{ form.hidden_tag() }}
         <input type="hidden" name="room" value="{{ room }}">
         <input type="hidden" name="date" value="{{ date }}">
         <input type="hidden" name="time" value="{{ time }}">
