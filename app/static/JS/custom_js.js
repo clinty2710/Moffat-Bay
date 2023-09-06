@@ -62,54 +62,26 @@ $(document).ready(function () {
     },
     toolTipClose: ["tooltip-click", "area-click"],
     areas: [
-      { key: "room_1a",
+      {
+        key: "room_1a",
         fillColor: "000000"
       },
-      { key: "room_1b",
+      {
+        key: "room_1b",
         fillColor: "000000"
       },
-      { key: "room_1c",
+      {
+        key: "room_1c",
         fillColor: "000000"
       },
-      { key: "room_1d",
+      {
+        key: "room_1d",
         fillColor: "000000"
       },
-      { key: "room_1e",
+      {
+        key: "room_1e",
         strokeColor: "000000"
-      },
-      { key: "room_1f",
-        strokeColor: "000000"
-      },
-      { key: "room_1g",
-        strokeColor: "000000"
-      },
-      { key: "room_1h",
-        strokeColor: "000000"
-      },
-      { key: "room_2a",
-        strokeColor: "000000"
-      },
-      { key: "room_2b",
-        strokeColor: "000000"
-      },
-      { key: "room_2c",
-      strokeColor: "000000"
-      },
-      { key: "room_2d",
-      strokeColor: "000000"
-      },
-      { key: "room_2e",
-      strokeColor: "000000"
-      },
-      { key: "room_2f",
-      strokeColor: "000000"
-      },
-      { key: "room_2g",
-      strokeColor: "000000"
-      },
-      { key: "room_2h",
-      strokeColor: "000000"
-      },
+      }
     ]
   });
 
