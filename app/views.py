@@ -129,7 +129,7 @@ def new_reservation():
         return render_template('confirm_reservation.html', form=form)
     elif request.method == 'GET':
         form = NewReservation()
-        return render_template('new_reservation.html', form=form)
+        return render_template('reservation.html', form=form)
     
 @app.route('/confirm_reservation', methods=['POST'])
 def confirm_reservation():
