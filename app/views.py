@@ -169,6 +169,37 @@ def show_reservations():
     reservations = Reservation.query.filter_by(user_id=session['user_id']).all()
     return render_template('show_reservations.html', reservations=reservations)
 
+@app.route('/delete_reservation', methods=['POST'])
+def delete_reservation():
+    reservation_id = request.form['reservation_id']
+    reservation = Reservation.query.get(reservation_id)
+    db.session.delete(reservation)
+    db.session.commit()
+    flash('Reservation deleted successfully!', 'success')
+    return redirect(url_for('show_reservations'))
+
+@app.route('/edit_reservation', methods=['GET', 'POST'])
+def edit_reservation():
+    reservation_id = request.args.get('reservation_id')
+    reservation = Reservation.query.get(reservation_id)
+    form = NewReservation(obj=reservation)
+
+    if form.validate_on_submit():
+        # The form data is valid, so you can proceed with updating the reservation
+        # Extract the data from the form
+        reservation.room_number = form.room_number.data
+        reservation.start_date = form.start_date.data
+        reservation.end_date = form.end_date.data
+        reservation.num_of_guests = form.num_of_guests.data
+
+        # Save the changes to the database
+        db.session.commit()
+
+        flash('Reservation updated successfully!', 'success')
+        return redirect(url_for('show_reservations'))
+    else:
+        return render_template('edit_reservation.html', form=form)
+
 @app.route('/get_room_availability', methods=['GET'])
 def get_room_availability():
     if not session.get('user_id'):
