@@ -156,7 +156,25 @@ $(document).ready(function () {
       }
     ]
   });
-
+  $('#num_of_guests').on('change', function () {
+    var selectedGuests = $(this).val();
+    if (selectedGuests > 0) {
+      $.ajax({
+        url: '/get_room_price',
+        type: 'GET',
+        data: { num_of_guests: selectedGuests },
+        success: function (response) {
+          console.log('Room Price:', response); // Add this line for debugging
+          var roomPrice = response;
+          $('#room_price').text(roomPrice);
+        },        
+        error: function (error) {
+          console.error(error);
+        }
+      });
+    }
+  });
+    
   $('#room_number').on('change', function () {
     var selectedRoom = $(this).val();
 

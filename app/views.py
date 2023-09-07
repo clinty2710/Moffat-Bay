@@ -238,6 +238,15 @@ def get_room_availability():
 
     return jsonify([])
 
+@app.route('/get_room_price', methods=['GET'])
+def get_room_price():
+    num_of_guests = request.args.get('num_of_guests')
+    if num_of_guests:
+        return jsonify(price_of_room(num_of_guests))
+    else:
+        return jsonify(None)
+    
+
 @app.route('/about')
 def about():
     return render_template('about.html')
