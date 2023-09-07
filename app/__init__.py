@@ -79,10 +79,10 @@ def create_tables():
             # Insert data into the Reservation table
             reservations_to_insert = [
                 Reservation(start_date="2023-08-21", end_date="2023-08-23", room_number="2b", num_of_guests=2, user_id=1),
-                Reservation(start_date="2023-09-05", end_date="2023-09-10", room_number="3a", num_of_guests=1, user_id=2),
+                Reservation(start_date="2023-09-05", end_date="2023-09-10", room_number="1a", num_of_guests=1, user_id=2),
                 Reservation(start_date="2023-10-15", end_date="2023-10-20", room_number="8b", num_of_guests=3, user_id=3),
                 Reservation(start_date="2023-11-01", end_date="2023-11-05", room_number="1a", num_of_guests=2, user_id=1),
-                Reservation(start_date="2023-12-10", end_date="2023-12-15", room_number="7b", num_of_guests=4, user_id=2),
+                Reservation(start_date="2023-12-10", end_date="2023-12-15", room_number="2b", num_of_guests=4, user_id=2),
             ]
             db.session.bulk_save_objects(reservations_to_insert)
             db.session.commit()
