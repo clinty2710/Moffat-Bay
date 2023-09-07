@@ -131,7 +131,16 @@ def new_reservation():
     elif request.method == 'GET':
         form = NewReservation()
         return render_template('reservation.html', form=form)
-    
+
+def price_of_room(num_guests):
+    guests = int(num_guests)
+    if guests <= 2:
+        return 115 * 1.05
+    elif guests <= 5:
+        return 150 * 1.05
+    elif guests >= 6:
+        return None
+
 @app.route('/confirm_reservation', methods=['POST'])
 def confirm_reservation():
     form = NewReservation(request.form)
@@ -143,6 +152,8 @@ def confirm_reservation():
         start_date = form.start_date.data
         end_date = form.end_date.data
         num_of_guests = form.num_of_guests.data
+        room_price = price_of_room(form.num_of_guests.data)
+
 
         # Create a new reservation and save to the database
         new_reservation = Reservation(
@@ -150,6 +161,7 @@ def confirm_reservation():
             start_date=start_date,
             end_date=end_date,
             num_of_guests=num_of_guests,
+            price=room_price,
             user_id=session['user_id']
         )
         db.session.add(new_reservation)
@@ -191,6 +203,7 @@ def edit_reservation():
         reservation.start_date = form.start_date.data
         reservation.end_date = form.end_date.data
         reservation.num_of_guests = form.num_of_guests.data
+        reservation.price = price_of_room(form.num_of_guests.data)
 
         # Save the changes to the database
         db.session.commit()
@@ -199,6 +212,8 @@ def edit_reservation():
         return redirect(url_for('show_reservations'))
     else:
         return render_template('edit_reservation.html', form=form)
+
+
 
 @app.route('/get_room_availability', methods=['GET'])
 def get_room_availability():

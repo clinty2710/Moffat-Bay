@@ -13,13 +13,10 @@
         <thead>
             <tr>
                 <th>Reservation ID</th>
-                <th>Customer ID</th>
-                <th>Room ID</th>
-                <th>Check In</th>
-                <th>Check Out</th>
+                <th>Room Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th>Number of Guests</th>
-                <th>Number of Rooms</th>
-                <th>Number of Nights</th>
                 <th>Price</th>
                 <th>Actions</th>
             </tr>
@@ -27,18 +24,15 @@
         <tbody>
             {% for reservation in reservations %}
                 <tr>
-                    <td>{{ reservation.reservation_id }}</td>
-                    <td>{{ reservation.customer_id }}</td>
-                    <td>{{ reservation.room_id }}</td>
-                    <td>{{ reservation.check_in }}</td>
-                    <td>{{ reservation.check_out }}</td>
-                    <td>{{ reservation.num_guests }}</td>
-                    <td>{{ reservation.num_rooms }}</td>
-                    <td>{{ reservation.num_nights }}</td>
+                    <td>{{ reservation.rid }}</td>
+                    <td>{{ reservation.room_number }}</td>
+                    <td>{{ reservation.start_date }}</td>
+                    <td>{{ reservation.end_date }}</td>
+                    <td>{{ reservation.num_of_guests }}</td>
                     <td>{{ reservation.price }}</td>
                     <td>
-                        <a href="{{ url_for('reservation_edit', reservation_id=reservation.reservation_id) }}">Edit</a>
-                        <a href="{{ url_for('reservation_delete', reservation_id=reservation.reservation_id) }}">Delete</a>
+                        <a href="{{ url_for('edit_reservation', reservation_id=reservation.reservation_id) }}">Edit</a>
+                        <a href="{{ url_for('delete_reservation', reservation_id=reservation.reservation_id) }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
