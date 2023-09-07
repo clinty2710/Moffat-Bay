@@ -11,5 +11,84 @@
 
 {% block content %}
     <h2><br>Attractions</h2>
+
+    <div class="container">
+        <p class="action-call">
+              Stop by the front desk for<br>
+              schedules, rentals and recommendations
+            </p>
+          <div class="card-columns">
+              <div class="card text-center ">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="{{ url_for('static', filename='images/kayak.jpg') }}" class="img-fluid" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                    </a>
+                  </div>
+                
+                  <div class="card-body">
+                    <h5 class="card-title">Kayaking</h5>
+                    <p class="card-text">
+                      The Pacific is calling! Live your ocean adventure.
+                    </p>
+                
+                
+                  </div>
+                </div>
+                <div class="card text-center ">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="{{ url_for('static', filename='images/scuba.png') }}" class="img-fluid" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                    </a>
+                  </div>
+                
+                  <div class="card-body">
+                    <h5 class="card-title">Scuba Diving</h5>
+                    <p class="card-text">
+                      Unique marine life makes our scuba experiences one in a million.
+                    </p>
+                
+                
+                  </div>
+                </div>
+          </div>
+          <div class="card-columns">
+              <div class="card text-center ">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="{{ url_for('static', filename='images/whalewatching.png') }}" class="img-fluid" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                    </a>
+                  </div>
+                
+                  <div class="card-body">
+                    <h5 class="card-title">Whale Watching</h5>
+                    <p class="card-text">
+                      Our world renowned whale watching is awe inspiring.
+                    </p>
+                
+                
+                  </div>
+                </div>
+                <div class="card text-center ">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="{{ url_for('static', filename='images/hiking.jpg') }}" class="img-fluid" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                    </a>
+                  </div>
+                
+                  <div class="card-body">
+                    <h5 class="card-title">Hiking</h5>
+                    <p class="card-text">
+                      Explore nearby Evergreen forests and bask in the open air beauty.
+                    </p>
+                
+                
+                  </div>
+                </div>
+          </div>
+    </div>
  
 {% endblock %}
