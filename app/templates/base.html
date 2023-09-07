@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -95,8 +95,8 @@
                             <li><a href="{{ url_for('new_reservation')}}">Reservations</a></li>
                         </ul>
                         <ul class="list-unstyled" style="padding: 20px;">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Attractions</a></li>
+                            <li><a href="{{ url_for('about') }}">About Us</a></li>
+                            <li><a href="{{ url_for('attractions') }}">Attractions</a></li>
                         </ul>
                         <div class="social-icons-right">
                             <a href="#">
