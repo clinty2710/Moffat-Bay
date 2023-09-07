@@ -120,17 +120,54 @@ def profile():
 
     return render_template('profile.html', form=form, user=user)
 
-@app.route('/new_reservation', methods=['GET', 'POST'])
-def new_reservation():
+@app.route('/reservation', methods=['GET', 'POST'])
+@app.route('/reservation/<int:reservation_id>', methods=['GET', 'POST'])
+def reservation(reservation_id=None):
     if not session.get('user_id'):
-        flash('Please login to make a reservation.', 'info')
+        flash('Please login to make or edit a reservation.', 'info')
         return redirect(url_for('login'))
-    if request.method == 'POST':
-        form = NewReservation(request.form)
-        return render_template('confirm_reservation.html', form=form)
-    elif request.method == 'GET':
+
+    if reservation_id:
+        # Edit an existing reservation
+        reservation = Reservation.query.get(reservation_id)
+        form = NewReservation(obj=reservation)
+        form.room_number.choices = [(reservation.room_number, reservation.room_number)]  # Disable changing room number
+    else:
+        # Create a new reservation
         form = NewReservation()
-        return render_template('reservation.html', form=form)
+
+    if form.validate_on_submit():
+        # Handle form submission (create or update reservation)
+        if reservation_id:
+            # Update an existing reservation
+            form.populate_obj(reservation)
+            db.session.commit()
+            flash('Reservation updated successfully!', 'success')
+            return redirect(url_for('show_reservations'))
+        else:
+            # Create a new reservation
+            room_number = form.room_number.data
+            start_date = form.start_date.data
+            end_date = form.end_date.data
+            num_of_guests = form.num_of_guests.data
+            room_price = price_of_room(num_of_guests)
+
+            new_reservation = Reservation(
+                room_number=room_number,
+                start_date=start_date,
+                end_date=end_date,
+                num_of_guests=num_of_guests,
+                price=room_price,
+                user_id=session['user_id']
+            )
+            db.session.add(new_reservation)
+            db.session.commit()
+
+            flash('Reservation added successfully!', 'success')
+            return redirect(url_for('show_reservations'))
+
+    return render_template('reservation.html', form=form, reservation_id=reservation_id)
+
 
 def price_of_room(num_guests):
     guests = int(num_guests)
@@ -171,7 +208,7 @@ def confirm_reservation():
         return redirect(url_for('index'))
     else:
         flash('Reservation failed. Please check your information and try again.', 'danger')
-        return redirect(url_for('new_reservation'))
+        return redirect(url_for('reservation'))
 
 @app.route('/show_reservations', methods=['GET'])
 def show_reservations():
@@ -189,31 +226,6 @@ def delete_reservation():
     db.session.commit()
     flash('Reservation deleted successfully!', 'success')
     return redirect(url_for('show_reservations'))
-
-@app.route('/edit_reservation', methods=['GET', 'POST'])
-def edit_reservation():
-    reservation_id = request.args.get('reservation_id')
-    reservation = Reservation.query.get(reservation_id)
-    form = NewReservation(obj=reservation)
-
-    if form.validate_on_submit():
-        # The form data is valid, so you can proceed with updating the reservation
-        # Extract the data from the form
-        reservation.room_number = form.room_number.data
-        reservation.start_date = form.start_date.data
-        reservation.end_date = form.end_date.data
-        reservation.num_of_guests = form.num_of_guests.data
-        reservation.price = price_of_room(form.num_of_guests.data)
-
-        # Save the changes to the database
-        db.session.commit()
-
-        flash('Reservation updated successfully!', 'success')
-        return redirect(url_for('show_reservations'))
-    else:
-        return render_template('edit_reservation.html', form=form)
-
-
 
 @app.route('/get_room_availability', methods=['GET'])
 def get_room_availability():
