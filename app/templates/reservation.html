@@ -10,7 +10,7 @@
 {% block title %} Reservations {% endblock %}
 {% block content %}
 <h1><br>Reservations</h1>
-<div class="container-reservation">
+<div class="container">
 <!-- Reservation form -->
 <form method="POST" action="/new_reservation">
   {{ form.hidden_tag() }}
@@ -75,6 +75,8 @@
         </div>
       </div>
     </div>
+    <!-- div for displaying prices -->
+    <div id="#room_price" class="col-md-2"></div>
   
     <!-- Submit Button -->
     <div class="form-group text-center">
