@@ -1,0 +1,27 @@
+<!--
+    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    CSD460 Capstone Project
+
+    edit_reservation.html
+-->
+
+{% extends 'base.html' %}
+
+{% block title %} Title Goes Here {% endblock %}
+{% block content %}
+    <h1>Edit Reservation</h1>
+    <form action="/edit_reservation" method="post">
+        <label for="reservation_id">Reservation ID:</label>
+        <input type="text" id="reservation_id" name="reservation_id" value="{{ reservation_id }}" readonly><br><br>
+        <label for="start_date">Reservation Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ start_date }}"><br><br>
+        <label for="end_date">Reservation End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ end_date }}"><br><br>
+        <label for="room_number">Room Number:</label>
+        <input type="text" id="room_number" name="room_number" value="{{ room_number }}"><br><br>
+        <label for="num_guests">Number of Guests:</label>
+        <input type="text" id="num_guests" name="num_guests" value="{{ num_guests }}"><br><br>
+        <input type="text" id="room_id" name="room_id" value="{{ room_id }}"><br><br>
+
+        <input type="submit" value="Submit">
+{% endblock %}
