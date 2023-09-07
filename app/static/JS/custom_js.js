@@ -42,9 +42,9 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
   var image = $('#hotel-image');
-
+  var unavailableRooms = [];
   // Define your mapster configuration
-  image.mapster({
+  roomMap = image.mapster({
     fillOpacity: 0.4,
     fillColor: "d42e16",
     stroke: true,
@@ -57,6 +57,9 @@ $(document).ready(function () {
     showToolTip: true,
     onClick: function (e) {
       var roomNumber = e.key.replace("room_", "");
+      if (unavailableRooms.includes(roomNumber)) {
+        return false;
+      }
       $('#room_number').val(roomNumber);
       console.log(roomNumber);
     },
@@ -171,7 +174,7 @@ $(document).ready(function () {
         var unavailableRooms = response;
 
         // Update the image map to mark unavailable rooms
-        updateImageMap(unavailableRooms);
+        updateImageMap(unavailableRooms,roomMap);
       },
       error: function (error) {
         console.error(error);
@@ -179,15 +182,28 @@ $(document).ready(function () {
     });
   });
 
-  function updateImageMap(unavailableRooms) {
-    var roomsToHighlight = [];
+  function updateImageMap(rooms, roomMap) {
+    // Deselect all areas first
+    roomMap.mapster('deselect');
+  
+    // Update the unavailableRooms array
+    unavailableRooms = rooms;
   
     for (var i = 0; i < unavailableRooms.length; i++) {
-      roomsToHighlight.push('room_' + unavailableRooms[i]);
-    }
+      var roomKey = 'room_' + unavailableRooms[i];
   
-    image.mapster('set', true, roomsToHighlight);
-    console.log(roomsToHighlight);
+      // Set the area as unavailable, not selectable, and in a static state (disabled)
+      roomMap.mapster('set', true, roomKey, {
+        isSelectable: false,
+        isDeselectable: true,
+        staticState: true,
+        fillColor: "FF0000"
+      });
+  
+      console.log(roomKey + ' is unavailable, not selectable, and marked in red (disabled)');
+    }
   }
   
+  
+ 
 });
