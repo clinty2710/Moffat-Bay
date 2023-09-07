@@ -44,7 +44,6 @@ $(document).ready(function () {
   var image = $('#hotel-image');
   var unavailableRooms = [];
   var currentRoom = null;
-  // Define your mapster configuration
   roomMap = image.mapster({
     fillOpacity: 0.4,
     fillColor: "d42e16",
