@@ -197,6 +197,14 @@ $(document).ready(function () {
     // Update the unavailableRooms array
     unavailableRooms = rooms;
   
+    // Remove unavailable rooms from the dropdown list
+    $('#room_number option').each(function () {
+      var roomNumber = $(this).val();
+      if (unavailableRooms.includes(roomNumber)) {
+        $(this).remove();
+      }
+    });
+  
     for (var i = 0; i < unavailableRooms.length; i++) {
       var roomKey = 'room_' + unavailableRooms[i];
   
@@ -211,4 +219,4 @@ $(document).ready(function () {
       console.log(roomKey + ' is unavailable, not selectable, and marked in red (disabled)');
     }
   }
-});
+  });
