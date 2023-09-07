@@ -43,6 +43,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   var image = $('#hotel-image');
   var unavailableRooms = [];
+  var currentRoom = null;
   // Define your mapster configuration
   roomMap = image.mapster({
     fillOpacity: 0.4,
@@ -57,11 +58,18 @@ $(document).ready(function () {
     showToolTip: true,
     onClick: function (e) {
       var roomNumber = e.key.replace("room_", "");
+    
+      // Check if the room is in the unavailableRooms array
       if (unavailableRooms.includes(roomNumber)) {
-        return false;
+        return false; // Prevent selecting an unavailable room
       }
+    
+      if (currentRoom != null) {
+        roomMap.mapster('set', false, 'room_' + currentRoom);
+      }
+    
+      currentRoom = roomNumber;
       $('#room_number').val(roomNumber);
-      console.log(roomNumber);
     },
     toolTipClose: ["tooltip-click", "area-click"],
     areas: [
@@ -203,7 +211,4 @@ $(document).ready(function () {
       console.log(roomKey + ' is unavailable, not selectable, and marked in red (disabled)');
     }
   }
-  
-  
- 
 });
