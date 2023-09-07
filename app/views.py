@@ -191,3 +191,11 @@ def get_room_availability():
         return jsonify(unavailable_rooms)
 
     return jsonify([])
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/attractions')
+def attractions():
+    return render_template('attractions.html')
