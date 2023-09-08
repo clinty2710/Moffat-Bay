@@ -84,8 +84,6 @@
     <div class="form-group text-center">
       <button type="button" class="btn btn-primary" id="openModalButton">Submit</button>
     </div>
-    <!-- Modal for Confirmation -->
-    <!-- Modal for Confirmation -->
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-top" role="document">
     <div class="modal-content">
@@ -95,7 +93,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <!-- Modal body, including the confirmation checkbox -->
       <div class="modal-body">
         Are you sure you want to make this reservation?
         <div class="form-check">
@@ -105,7 +102,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <!-- Button inside the modal to submit the form -->
         {{ form.submit(class="btn btn-primary") }}
       </div>
     </div>
@@ -113,28 +109,10 @@
 </div>
   </form>
 </div>
-<style>
-  /* Custom CSS to position the modal at the top of the page */
-  .modal-top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-  }
-</style>
 <script>
   $(document).ready(function () {
-    // Event handler for the button outside the modal to open the modal
     $('#openModalButton').click(function () {
-      // Show the modal
       $('#confirmationModal').modal('show');
-    });
-
-    // Event handler for the button inside the modal to submit the form
-    $('#submitFormButton').click(function () {
-      // Submit the form
-      $('form').submit();
     });
   });
 </script>
