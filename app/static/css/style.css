@@ -10,7 +10,12 @@ kayak.jpg - https://www.viator.com/tours/Interlaken/Kayak-Tour-of-the-Turquoise-
 scuba.png - https://blog.wa.aaa.com/travel/getaways/washingtons-best-dives/
 lodge.jpg - https://stablediffusionweb.com/
 background.jpg - https://www.vecteezy.com/
-outdoorlodge.png - https://pugetsound.soundlistings.com/i/puget-sound-highest-priced-homes 
+outdoorlodge.png - https://pugetsound.soundlistings.com/i/puget-sound-highest-priced-homes
+lobby.jpg - http://www.gregrobinsonarchitect.com/pacific-northwest-lodge-inspired-home
+divider.png - https://www.freepnglogos.com/pics/divider
+room.jpg - https://www.theporterhotel.com/accommodations/
+islands.jpg - https://www.visitsanjuans.com/about
+killerwhale.jpg - https://www.visitsanjuans.com/whale-watching
 */
 
 /* base Page */
@@ -183,35 +188,7 @@ body::before {
     padding: 5px 0;
     text-align: center;
 }
-
-.blurry-divider {
-    width: 100%;
-    height: 2px; /* Adjust the height as needed */
-    position: relative;
-  }
   
-  .blurry-divider::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    filter: blur(5px); /* Adjust the blur effect as needed */
-  }
-  
-  .blurry-divider::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    filter: blur(5px); /* Adjust the blur effect as needed */
-  }  
-
 .footer h4 {
     color: #333;
     margin-bottom: 0px;
@@ -273,58 +250,33 @@ body::before {
 }
 
 /* about us */
-#close-button {
-    display: none;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    cursor: pointer;
-  }
-  
-  .popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    text-align: center;
-  }
-  
-  .popup-content {
-    background-color: white;
-    max-width: 90%;
-    max-height: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+
+.container_about {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.left {
+    flex: 1;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  #full-size-image {
-    max-width: 90%;
-    max-height: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  #close-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    font-size: 24px;
-    color: white;
-  }
-    /* CSS for the vertical divider */
-    .vr {
-        border-left: 1px solid #ccc; /* Adjust the color and style as needed */
-        margin: 0 20px; /* Adjust the margin as needed */
-    }
+}
+
+.right {
+    flex: 1;
+    padding: 20px;
+}
+
+.employee-photo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.map {
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+}

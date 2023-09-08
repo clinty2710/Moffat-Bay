@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 <!--
-    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
     CSD460 Capstone Project
 
     about.html
@@ -10,84 +10,45 @@
 {% block title %} About Us {% endblock %}
 
 {% block content %}
-    <h2><br>About Us</h2>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <h2 class="sub-header">History</h2>
-                <p>Moffat Bay Lodge has a rich and storied history that dates back to the early 20th century. Founded by
-                    John Moffat, a visionary entrepreneur and nature enthusiast, the lodge began as a modest lakeside
-                    retreat for those seeking solace in the beauty of nature.</p>
-                <p>Over the years, Moffat Bay Lodge evolved into a premier destination for outdoor enthusiasts, offering
-                    a wide range of recreational activities including boating, fishing, hiking, and wildlife watching.
-                    The lodge's commitment to preserving the natural environment while providing exceptional guest
-                    experiences has been the cornerstone of its success.</p>
+<h1><br>About Us</h1>
+    <div class="container_about">
+        <div class="left">
+            <h2>Our History</h2>
+            <p>Company's history here.</p>
+            
+            <h2>Contact Information</h2>
+            <address>
+                <p>123 Main Street</p>
+                <p>City, State, ZIP Code</p>
+                <p>Email: info@example.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </address>
+        </div>
+        <div class="vr"></div>
+        <div class="right">
+            <h2>Our Team</h2>
+            <div class="employee">
+                <img class="employee-photo" src="employee1.jpg" alt="Employee 1">
+                <p>Employee 1</p>
             </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="thumbnail" onclick="showPopup(this)">
-                            <img src="test.png" alt="Image 1" class="img-fluid max-width-100">
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="thumbnail" onclick="showPopup(this)">
-                            <img src="test.png" alt="Image 2" class="img-fluid max-width-100">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="thumbnail" onclick="showPopup(this)">
-                            <img src="test.png" alt="Image 3" class="img-fluid max-width-100">
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="thumbnail" onclick="showPopup(this)">
-                            <img src="test.png" alt="Image 4" class="img-fluid max-width-100">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="thumbnail" onclick="showPopup(this)">
-                            <img src="test.png" alt="Image 5" class="img-fluid max-width-100">
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="thumbnail" onclick="showPopup(this)">
-                            <img src="test.png" alt="Image 6" class="img-fluid max-width-100">
-                        </div>
-                    </div>
-                </div>
-                <div id="popup" class="popup">
-                    <img id="full-size-image" src="">
-                    <button id="close-button" onclick="closePopup()">X</button>
-                </div>
+            <div class="employee">
+                <img class="employee-photo" src="employee2.jpg" alt="Employee 2">
+                <p>Employee 2</p>
+            </div>
+            <div class="employee">
+                <img class="employee-photo" src="employee3.jpg" alt="Employee 3">
+                <p>Employee 3</p>
+            </div>
+            <div class="employee">
+                <img class="employee-photo" src="employee4.jpg" alt="Employee 4">
+                <p>Employee 4</p>
+            </div>
+            
+            <h2>Location</h2>
+            <div id="map" class="map">
+                
             </div>
         </div>
     </div>
-    <!-- Divider -->
-    <div class="container">
-        <div class="d-flex">
-            <!-- Left Content (Contact Information) -->
-            <div class="px-4">
-                <h2 class="sub-header">Contact Information</h2>
-                <p>Email: contact@example.com</p>
-                <p>Phone: +1 (123) 456-7890</p>
-                <p>Address: 123 Main Street, City, Country</p>
-            </div>
-
-            <!-- Vertical divider -->
-            <div class="vr" style="height: 250px;"></div>
-
-            <!-- Right Content (Map Location) -->
-            <div class="px-4">
-                <h2 class="sub-header">Map Location</h2>
-             
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}
