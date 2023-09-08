@@ -204,6 +204,12 @@ def show_reservations():
 def delete_reservation():
     reservation_id = request.form['reservation_id']
     reservation = Reservation.query.get(reservation_id)
+    if reservation is None:
+        flash('Reservation not found.', 'danger')
+        return redirect(url_for('show_reservations'))
+    if reservation.user_id != session['user_id']:
+        flash('You do not have permission to delete this reservation.', 'danger')
+        return redirect(url_for('show_reservations'))
     db.session.delete(reservation)
     db.session.commit()
     flash('Reservation deleted successfully!', 'success')
