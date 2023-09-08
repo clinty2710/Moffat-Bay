@@ -120,54 +120,68 @@ def profile():
 
     return render_template('profile.html', form=form, user=user)
 
-@app.route('/reservation', methods=['GET', 'POST'])
-@app.route('/reservation/<int:reservation_id>', methods=['GET', 'POST'])
-def reservation(reservation_id=None):
+@app.route('/reservation/new', methods=['GET', 'POST'])
+def new_reservation():
     if not session.get('user_id'):
-        flash('Please login to make or edit a reservation.', 'info')
+        flash('Please login to make a reservation.', 'info')
         return redirect(url_for('login'))
 
-    if reservation_id:
-        # Edit an existing reservation
-        reservation = Reservation.query.get(reservation_id)
-        form = NewReservation(obj=reservation)
-        form.room_number.choices = [(reservation.room_number, reservation.room_number)]  # Disable changing room number
-    else:
-        # Create a new reservation
-        form = NewReservation()
+    form = NewReservation()
+    reservation_id = None 
+    if form.validate_on_submit():
+        if form.confirmation.data:
+            room_number = form.room_number.data
+            start_date = form.start_date.data
+            end_date = form.end_date.data
+            num_of_guests = form.num_of_guests.data
+            room_price = price_of_room(num_of_guests)
+
+            new_reservation = Reservation(
+                room_number=room_number,
+                start_date=start_date,
+                end_date=end_date,
+                num_of_guests=num_of_guests,
+                price=room_price,
+                user_id=session['user_id']
+            )
+            db.session.add(new_reservation)
+            db.session.commit()
+
+            flash('Reservation added successfully!', 'success')
+            return redirect(url_for('show_reservations'))
+        else:
+            return render_template('reservation.html', reservation_id=reservation_id, form=form)
+
+    return render_template('reservation.html', reservation_id=reservation_id, form=form)
+
+@app.route('/reservation/edit/<int:reservation_id>', methods=['GET', 'POST'])
+def edit_reservation(reservation_id):
+    if not session.get('user_id'):
+        flash('Please login to edit a reservation.', 'info')
+        return redirect(url_for('login'))
+
+    reservation = Reservation.query.get(reservation_id)
+
+    if reservation is None:
+        flash('Reservation not found.', 'danger')
+        return redirect(url_for('show_reservations'))
+
+    if reservation.user_id != session['user_id']:
+        flash('You do not have permission to edit this reservation.', 'danger')
+        return redirect(url_for('show_reservations'))
+
+    form = NewReservation(obj=reservation)
+    form.room_number.choices = [(reservation.room_number, reservation.room_number)]
 
     if form.validate_on_submit():
-        # Handle form submission (create or update reservation)
         if form.confirmation.data:
-            if reservation_id:
-                # Update an existing reservation
-                form.populate_obj(reservation)
-                db.session.commit()
-                flash('Reservation updated successfully!', 'success')
-                return redirect(url_for('show_reservations'))
-            else:
-                # Create a new reservation
-                room_number = form.room_number.data
-                start_date = form.start_date.data
-                end_date = form.end_date.data
-                num_of_guests = form.num_of_guests.data
-                room_price = price_of_room(num_of_guests)
-
-                new_reservation = Reservation(
-                    room_number=room_number,
-                    start_date=start_date,
-                    end_date=end_date,
-                    num_of_guests=num_of_guests,
-                    price=room_price,
-                    user_id=session['user_id']
-                )
-                db.session.add(new_reservation)
-                db.session.commit()
-
-                flash('Reservation added successfully!', 'success')
-                return redirect(url_for('show_reservations'))
+            form.populate_obj(reservation)
+            db.session.commit()
+            flash('Reservation updated successfully!', 'success')
+            return redirect(url_for('show_reservations'))
         else:
             return render_template('reservation.html', form=form, reservation_id=reservation_id)
+
     return render_template('reservation.html', form=form, reservation_id=reservation_id)
 
 def price_of_room(num_guests):
@@ -178,38 +192,6 @@ def price_of_room(num_guests):
         return 150 * 1.05
     elif guests >= 6:
         return None
-
-@app.route('/confirm_reservation', methods=['POST'])
-def confirm_reservation():
-    form = NewReservation(request.form)
-
-    if form.validate_on_submit():
-        # The form data is valid, so you can proceed with creating the reservation
-        # Extract the data from the form
-        room_number = form.room_number.data
-        start_date = form.start_date.data
-        end_date = form.end_date.data
-        num_of_guests = form.num_of_guests.data
-        room_price = price_of_room(form.num_of_guests.data)
-
-
-        # Create a new reservation and save to the database
-        new_reservation = Reservation(
-            room_number=room_number,
-            start_date=start_date,
-            end_date=end_date,
-            num_of_guests=num_of_guests,
-            price=room_price,
-            user_id=session['user_id']
-        )
-        db.session.add(new_reservation)
-        db.session.commit()
-
-        flash('Reservation added successfully!', 'success')
-        return redirect(url_for('index'))
-    else:
-        flash('Reservation failed. Please check your information and try again.', 'danger')
-        return redirect(url_for('reservation'))
 
 @app.route('/show_reservations', methods=['GET'])
 def show_reservations():

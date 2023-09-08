@@ -31,13 +31,13 @@
                     <td>{{ reservation.num_of_guests }}</td>
                     <td>{{ reservation.price }}</td>
                     <td>
-                        <a href="{{ url_for('reservation', reservation_id=reservation.rid) }}">Edit</a>
+                        <a href="{{ url_for('edit_reservation', reservation_id=reservation.rid) }}">Edit</a>
                         <a href="{{ url_for('delete_reservation', reservation_id=rid) }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{{ url_for('reservation') }}">Add Reservation</a>
+    <a href="{{ url_for('new_reservation') }}">Add Reservation</a>
 
 {% endblock %}
