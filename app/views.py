@@ -200,9 +200,9 @@ def show_reservations():
     reservations = Reservation.query.filter_by(user_id=session['user_id']).all()
     return render_template('show_reservations.html', reservations=reservations)
 
-@app.route('/delete_reservation', methods=['POST'])
+@app.route('/delete_reservation')
 def delete_reservation():
-    reservation_id = request.form['reservation_id']
+    reservation_id = request.args.get('reservation_id')
     reservation = Reservation.query.get(reservation_id)
     if reservation is None:
         flash('Reservation not found.', 'danger')
