@@ -138,36 +138,37 @@ def reservation(reservation_id=None):
 
     if form.validate_on_submit():
         # Handle form submission (create or update reservation)
-        if reservation_id:
-            # Update an existing reservation
-            form.populate_obj(reservation)
-            db.session.commit()
-            flash('Reservation updated successfully!', 'success')
-            return redirect(url_for('show_reservations'))
+        if form.confirmation.data:
+            if reservation_id:
+                # Update an existing reservation
+                form.populate_obj(reservation)
+                db.session.commit()
+                flash('Reservation updated successfully!', 'success')
+                return redirect(url_for('show_reservations'))
+            else:
+                # Create a new reservation
+                room_number = form.room_number.data
+                start_date = form.start_date.data
+                end_date = form.end_date.data
+                num_of_guests = form.num_of_guests.data
+                room_price = price_of_room(num_of_guests)
+
+                new_reservation = Reservation(
+                    room_number=room_number,
+                    start_date=start_date,
+                    end_date=end_date,
+                    num_of_guests=num_of_guests,
+                    price=room_price,
+                    user_id=session['user_id']
+                )
+                db.session.add(new_reservation)
+                db.session.commit()
+
+                flash('Reservation added successfully!', 'success')
+                return redirect(url_for('show_reservations'))
         else:
-            # Create a new reservation
-            room_number = form.room_number.data
-            start_date = form.start_date.data
-            end_date = form.end_date.data
-            num_of_guests = form.num_of_guests.data
-            room_price = price_of_room(num_of_guests)
-
-            new_reservation = Reservation(
-                room_number=room_number,
-                start_date=start_date,
-                end_date=end_date,
-                num_of_guests=num_of_guests,
-                price=room_price,
-                user_id=session['user_id']
-            )
-            db.session.add(new_reservation)
-            db.session.commit()
-
-            flash('Reservation added successfully!', 'success')
-            return redirect(url_for('show_reservations'))
-
+            return render_template('reservation.html', form=form, reservation_id=reservation_id)
     return render_template('reservation.html', form=form, reservation_id=reservation_id)
-
 
 def price_of_room(num_guests):
     guests = int(num_guests)

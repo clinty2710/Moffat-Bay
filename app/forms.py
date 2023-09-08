@@ -4,7 +4,7 @@
 #    forms.py
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 class LoginForm(FlaskForm):
@@ -41,8 +41,11 @@ class NewReservation(FlaskForm):
     ])
     start_date = DateField('Start Date', validators=[DataRequired()])
     end_date = DateField('End Date', validators=[DataRequired()])
-    num_of_guests = StringField('Number of Guests', validators=[DataRequired()])
+    num_of_guests = IntegerField('Number of Guests', validators=[DataRequired()])
+    confirmation = BooleanField('Confirm Reservation', default=False)
     submit = SubmitField('Submit')
+    # Add this to your Python code to include a hidden field for confirmation
+
 
 class ConfirmReservation(FlaskForm):
     submit = SubmitField('Confirm Reservation')
