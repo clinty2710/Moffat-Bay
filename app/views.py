@@ -171,7 +171,6 @@ def edit_reservation(reservation_id):
         return redirect(url_for('show_reservations'))
 
     form = NewReservation(obj=reservation)
-    form.room_number.choices = [(reservation.room_number, reservation.room_number)]
 
     if form.validate_on_submit():
         if form.confirmation.data:
