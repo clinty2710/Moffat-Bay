@@ -18,7 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>{% block title %} {% endblock %}</title>
 </head>
-<body class="lightened-body">
+<body>
     <nav class="navbar ps-1 sticky-top navbar-expand-md navbar-light bg-info">
         <a class="navbar-brand" href="{{ url_for('index')}}">Moffat Bay Lodge</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,15 +79,15 @@
         {% endwith %}
         {% block content %} {% endblock %}
     </div>
-    
 
     <footer class="footer">
-        <div class="container-footer">
+        <img class="divider" src="{{ url_for('static', filename='images/divider.png') }}" alt="divider" style="opacity: 0.5;>
+        <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="text-center">
                     <h4><br>Moffat Bay Lodge</h4>
                 </div>
-                <div class="col-md-12 text-center">
+                <div class="text-center">
                     <div class="link-columns">
                         <div class="social-icons-left">
                             <a href="#">
