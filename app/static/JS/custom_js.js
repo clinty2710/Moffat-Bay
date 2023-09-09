@@ -7,6 +7,3 @@
 setTimeout(function () {
   $('#flash-messages').fadeOut('slow');
 }, 5000);  // 5000 milliseconds = 5 seconds
-$(document).ready(function () {
-
-  });

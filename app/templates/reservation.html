@@ -35,6 +35,8 @@
       </div>
     </div>
 
+    <div id="alert-container" class="alert alert-danger mt-3" style="display: none;"></div>
+
     <!-- Number of Guests StringField -->
     <div class="col-md-2">
       <div class="form-group text-center">
@@ -323,14 +325,20 @@ $(document).ready(function () {
   });
 
   $('#start_date, #end_date').on('change', function () {
-    // Get the selected start and end dates
-    var startDate = $('#start_date').val();
-    var endDate = $('#end_date').val();
-    if (new Date(startDate) > new Date(endDate)) {
-      alert('The start date must be before the end date.');
-      return false;
-    }
+ 
+  // Get the selected start and end dates
+  var startDate = $('#start_date').val();
+  var endDate = $('#end_date').val();
 
+  if (new Date(startDate) > new Date(endDate)) {
+    var alertContainer = $('#alert-container');
+    alertContainer.text('The start date must be before the end date.');
+    $('#end_date').val('');
+    alertContainer.show();
+    return false;
+  } else {
+    $('#alert-container').hide();
+  }
     // Make an AJAX request to the Flask route to get room availability
     $.ajax({
       url: '/get_room_availability',
@@ -406,7 +414,7 @@ $(document).ready(function () {
         fillColor: "FF0000"
       });
   
-      console.log(roomKey + ' is unavailable, not selectable, and marked in red (disabled)');
+      //console.log(roomKey + ' is unavailable, not selectable, and marked in red (disabled)');
     }
   }
   });
