@@ -3,6 +3,7 @@
 #
 #    views.py
 
+import datetime
 from flask import jsonify, render_template, render_template, redirect, request, url_for, flash, session
 from sqlalchemy import and_, or_
 from app import app, User, Reservation, db
@@ -139,6 +140,9 @@ def new_reservation():
 
             if start_date > end_date:
                 flash('Please select a valid date range.', 'danger')
+                return redirect(url_for('new_reservation'))
+            if start_date < datetime.date.today():
+                flash('Please select a valid date (after today).', 'danger')
                 return redirect(url_for('new_reservation'))
             
             new_reservation = Reservation(
