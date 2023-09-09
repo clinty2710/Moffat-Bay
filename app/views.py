@@ -190,9 +190,21 @@ def edit_reservation(reservation_id):
         if start_date < datetime.date.today():
             flash('Please select a valid date (after today).', 'danger')
             return redirect(url_for('new_reservation'))
-            
+
         if form.confirmation.data:
             form.populate_obj(reservation)
+            reservation.price = price_of_room(reservation.num_of_guests)
+                    #check if date is already taken by someone else
+            reservations = Reservation.query.filter(
+                and_(
+                    Reservation.start_date <= end_date,
+                    Reservation.end_date >= start_date
+                )
+            ).all()
+            for r in reservations:
+                if r.room_number == reservation.room_number and r.rid != reservation.rid:
+                    flash('Room is already reserved for that date.', 'danger')
+                    return redirect(url_for('edit_reservation', reservation_id=reservation_id))
             db.session.commit()
             flash('Reservation updated successfully!', 'success')
             return redirect(url_for('show_reservations'))
