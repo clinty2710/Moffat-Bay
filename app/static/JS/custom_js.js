@@ -215,6 +215,25 @@ $(document).ready(function () {
     if (initialSelectedRoom) {
       image.mapster('set', true, 'room_' + initialSelectedRoom);
     }
+    // Get the selected start and end dates
+    var startDate = $('#start_date').val();
+    var endDate = $('#end_date').val();
+
+    // Make an AJAX request to the Flask route to get room availability
+    $.ajax({
+      url: '/get_room_availability',
+      type: 'GET',
+      data: { start_date: startDate, end_date: endDate },
+      success: function (response) {
+        var unavailableRooms = response;
+
+        // Update the image map to mark unavailable rooms
+        updateImageMap(unavailableRooms, roomMap);
+      },
+      error: function (error) {
+        console.error(error);
+      }
+    });
   }, 100);
   function updateImageMap(rooms, roomMap) {
     // Deselect all areas first
