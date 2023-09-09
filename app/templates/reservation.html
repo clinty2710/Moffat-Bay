@@ -322,7 +322,11 @@ $(document).ready(function () {
 
     // Deselect all areas first
     image.mapster('deselect');
-
+    if (currentRoom != null) {
+        roomMap.mapster('set', false, 'room_' + currentRoom);
+    }
+    
+    currentRoom = selectedRoom;
     // Select the area corresponding to the selected room
     image.mapster('set', true, 'room_' + selectedRoom);
   });

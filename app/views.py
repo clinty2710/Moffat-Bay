@@ -274,7 +274,7 @@ def get_room_price():
     num_of_guests = request.args.get('num_of_guests')
     num_of_days = int(request.args.get('num_of_days', 1))
     if num_of_guests:
-        price = "Price: $" + str(price_of_room(num_of_guests) * num_of_days)
+        price = f"Price: ${price_of_room(num_of_guests) * num_of_days:.2f}"
         return jsonify(price)
     else:
         return jsonify(None)
