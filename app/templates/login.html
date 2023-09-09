@@ -11,7 +11,9 @@
 
 {% block content %}
     <h2><br>Login</h2>
-    <p>Don't have an account? Create one here <a href="{{ url_for('register') }}">Register</a></p>
+    <p>Don't have an account? Create one here <a href="{{ url_for('register') }}">
+    <button type="submit" class="btn btn-primary btn-sm">Register</button>   
+    </a></p>
     <form class="form" action="" method="post" style="margin-bottom: 300px">
         {{ form.hidden_tag() }}
         <div class="form-group">
@@ -22,7 +24,10 @@
             <label for="{{ form.password.id }}" class="form-label required-field">Password</label>
             {{ form.password(class="form-control", required="required") }}
         </div>
-        <p> <a href="{{ url_for('forgot_password') }}">Forgot Password?</a></p>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <p> <a href="{{ url_for('forgot_password') }}">
+        <button type="submit" class="btn btn-primary">Forgot Password?</button>
+        </a></p>
+        <button type="submit" class="btn btn-success btn-lg">Login</button>
+
     </form>
 {% endblock %}

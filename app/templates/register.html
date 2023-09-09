@@ -13,7 +13,9 @@
     <div class="container">
         <h2 class="mt-4"><br>Register Account</h2>
         <h4>Create an account to get started!</h4>
-        <p> Already have an account? Login <a href="{{ url_for('login') }}">here</a></p>
+        <p> Already have an account? Login <a href="{{ url_for('login') }}">
+        <button type="submit" class="btn btn-primary btn-sm">here</button>
+        </a></p>
         <form class="form" action="" method="post">
             {{ form.hidden_tag() }}
             
@@ -66,6 +68,6 @@
                 {% endfor %}
             </div>
 
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-success">Register</button>
         </form>
 {% endblock %}
