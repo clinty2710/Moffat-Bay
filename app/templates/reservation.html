@@ -394,8 +394,7 @@ $(document).ready(function () {
     unavailableRooms = rooms;
     //remove initialSelectedRoom from unavailableRooms
     if (initialSelectedRoom) {
-      console.log('initialSelectedRoom:', initialSelectedRoom);
-      unavailableRooms = unavailableRooms.filter(function (room) {
+        unavailableRooms = unavailableRooms.filter(function (room) {
         return room != initialSelectedRoom;
       });
       //add to the currentRoom variable
