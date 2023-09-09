@@ -194,7 +194,7 @@ def edit_reservation(reservation_id):
         if form.confirmation.data:
             form.populate_obj(reservation)
             reservation.price = price_of_room(reservation.num_of_guests)
-                    #check if date is already taken by someone else
+            #check if date is already taken by someone else
             reservations = Reservation.query.filter(
                 and_(
                     Reservation.start_date <= end_date,
