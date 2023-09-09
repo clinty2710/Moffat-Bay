@@ -155,10 +155,7 @@ $(document).ready(function () {
         fillColor: "c0d904",
         strokeColor: "055902"
       }
-    ],
-    onLoad: function () {
-      alert('onLoad event triggered');
-   } 
+    ]
   });
   $('#num_of_guests').on('change', function () {
     var selectedGuests = $(this).val();
@@ -178,7 +175,6 @@ $(document).ready(function () {
       });
     }
   });
-    
   $('#room_number').on('change', function () {
     var selectedRoom = $(this).val();
 
@@ -201,7 +197,6 @@ $(document).ready(function () {
       data: { start_date: startDate, end_date: endDate },
       success: function (response) {
         var unavailableRooms = response;
-
         // Update the image map to mark unavailable rooms
         updateImageMap(unavailableRooms,roomMap);
       },
@@ -210,8 +205,9 @@ $(document).ready(function () {
       }
     });
   });
+  var initialSelectedRoom;
   setTimeout(function () {
-    var initialSelectedRoom = $('#room_number').val();
+    initialSelectedRoom = $('#room_number').val();
     if (initialSelectedRoom) {
       image.mapster('set', true, 'room_' + initialSelectedRoom);
     }
@@ -241,7 +237,15 @@ $(document).ready(function () {
   
     // Update the unavailableRooms array
     unavailableRooms = rooms;
-  
+    //remove initialSelectedRoom from unavailableRooms
+    if (initialSelectedRoom) {
+      console.log('initialSelectedRoom:', initialSelectedRoom);
+      unavailableRooms = unavailableRooms.filter(function (room) {
+        return room != initialSelectedRoom;
+      });
+      //add to the currentRoom variable
+      currentRoom = initialSelectedRoom;
+    }
     // Remove unavailable rooms from the dropdown list
     $('#room_number option').each(function () {
       var roomNumber = $(this).val();
