@@ -242,7 +242,8 @@ def get_room_availability():
 def get_room_price():
     num_of_guests = request.args.get('num_of_guests')
     if num_of_guests:
-        return jsonify(price_of_room(num_of_guests))
+        price = "Price: $" + str(price_of_room(num_of_guests))
+        return jsonify(price)
     else:
         return jsonify(None)
     
