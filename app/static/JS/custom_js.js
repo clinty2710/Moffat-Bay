@@ -40,6 +40,7 @@ $(document).ready(function () {
   // Initial update
   updateAreaCoordinates();
 });
+var roomMap;
 $(document).ready(function () {
   var image = $('#hotel-image');
   var unavailableRooms = [];
@@ -154,7 +155,10 @@ $(document).ready(function () {
         fillColor: "c0d904",
         strokeColor: "055902"
       }
-    ]
+    ],
+    onLoad: function () {
+      alert('onLoad event triggered');
+   } 
   });
   $('#num_of_guests').on('change', function () {
     var selectedGuests = $(this).val();
@@ -206,7 +210,12 @@ $(document).ready(function () {
       }
     });
   });
-
+  setTimeout(function () {
+    var initialSelectedRoom = $('#room_number').val();
+    if (initialSelectedRoom) {
+      image.mapster('set', true, 'room_' + initialSelectedRoom);
+    }
+  }, 100);
   function updateImageMap(rooms, roomMap) {
     // Deselect all areas first
     roomMap.mapster('deselect');
