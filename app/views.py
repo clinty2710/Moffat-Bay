@@ -128,6 +128,7 @@ def new_reservation():
 
     form = NewReservation()
     reservation_id = None 
+
     if form.validate_on_submit():
         if form.confirmation.data:
             room_number = form.room_number.data
@@ -136,6 +137,10 @@ def new_reservation():
             num_of_guests = form.num_of_guests.data
             room_price = price_of_room(num_of_guests)
 
+            if start_date > end_date:
+                flash('Please select a valid date range.', 'danger')
+                return redirect(url_for('new_reservation'))
+            
             new_reservation = Reservation(
                 room_number=room_number,
                 start_date=start_date,

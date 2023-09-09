@@ -189,6 +189,10 @@ $(document).ready(function () {
     // Get the selected start and end dates
     var startDate = $('#start_date').val();
     var endDate = $('#end_date').val();
+    if (new Date(startDate) > new Date(endDate)) {
+      alert('The start date must be before the end date.');
+      return false;
+    }
 
     // Make an AJAX request to the Flask route to get room availability
     $.ajax({
