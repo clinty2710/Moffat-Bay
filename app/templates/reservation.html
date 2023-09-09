@@ -309,7 +309,6 @@ $(document).ready(function () {
       type: 'GET',
       data: { num_of_guests: num_of_guests, num_of_days: num_of_days },
       success: function (response) {
-        console.log('Room Price:', response); // Added this line for debugging
         var roomPrice = response;
         $('#room_price').text(roomPrice);
       },        
@@ -409,7 +408,6 @@ $(document).ready(function () {
         $(this).remove();
       }
     });
-  
     for (var i = 0; i < unavailableRooms.length; i++) {
       var roomKey = 'room_' + unavailableRooms[i];
   
@@ -420,8 +418,6 @@ $(document).ready(function () {
         staticState: true,
         fillColor: "FF0000"
       });
-  
-      //console.log(roomKey + ' is unavailable, not selectable, and marked in red (disabled)');
     }
   }
 });
