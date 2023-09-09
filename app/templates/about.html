@@ -12,11 +12,17 @@
 {% block content %}
 <h1><br>About Us</h1>
     <div class="container_about">
-        <div class="left">
-            <h2>Our History</h2>
-            <p>Company's history here.</p>
-            
-            <h2>Contact Information</h2>
+        <div class="left" style="text-align: center;">
+            <h2>Our History</h2><br>
+            <p>Moffat Bay Lodge has a rich and storied history that dates back to the early 20th century. Founded by
+                John Moffat, a visionary entrepreneur and nature enthusiast, the lodge began as a modest lakeside
+                retreat for those seeking solace in the beauty of nature.</p>
+            <p>Over the years, Moffat Bay Lodge evolved into a premier destination for outdoor enthusiasts, offering
+                a wide range of recreational activities including boating, fishing, hiking, and wildlife watching.
+                The lodge's commitment to preserving the natural environment while providing exceptional guest
+                experiences has been the cornerstone of its success.</p>
+
+            <h2><br><br>Contact Information</h2>
             <address>
                 <p>123 Main Street</p>
                 <p>City, State, ZIP Code</p>
@@ -25,30 +31,80 @@
             </address>
         </div>
         <div class="vr"></div>
-        <div class="right">
+        <div class="right" style="text-align: center;">
             <h2>Our Team</h2>
-            <div class="employee">
-                <img class="employee-photo" src="employee1.jpg" alt="Employee 1">
-                <p>Employee 1</p>
+            <div class="card-columns2">
+                <div class="card text-center ">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="{{ url_for('static', filename='images/employee1.png') }}" class="img-fluid" />
+                      <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                      </a>
+                    </div>
+                  
+                    <div class="card-body2">
+                      <h5 class="card-title">Joshua</h5>
+                      <p class="card-text">
+                        Boss #1
+                      </p>
+                  
+                    </div>
+                  </div>
+                  <div class="card text-center ">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="{{ url_for('static', filename='images/employee2.jpg') }}" class="img-fluid" />
+                      <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                      </a>
+                    </div>
+                  
+                    <div class="card-body2">
+                      <h5 class="card-title">Clint</h5>
+                      <p class="card-text">
+                        Boss #2
+                      </p>
+
+                    </div>
+                  </div>
             </div>
-            <div class="employee">
-                <img class="employee-photo" src="employee2.jpg" alt="Employee 2">
-                <p>Employee 2</p>
-            </div>
-            <div class="employee">
-                <img class="employee-photo" src="employee3.jpg" alt="Employee 3">
-                <p>Employee 3</p>
-            </div>
-            <div class="employee">
-                <img class="employee-photo" src="employee4.jpg" alt="Employee 4">
-                <p>Employee 4</p>
-            </div>
-            
-            <h2>Location</h2>
-            <div id="map" class="map">
-                
+            <div class="card-columns2">
+                <div class="card text-center ">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="{{ url_for('static', filename='images/employee4.png') }}" class="img-fluid" />
+                      <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                      </a>
+                    </div>
+                  
+                    <div class="card-body2">
+                      <h5 class="card-title">Aura Elle</h5>
+                      <p class="card-text">
+                        Boss #3
+                      </p>
+                  
+                  
+                    </div>
+                  </div>
+                  <div class="card text-center ">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="{{ url_for('static', filename='images/employee3.jpeg') }}" class="img-fluid" />
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                      </a>
+                    </div>
+                  
+                    <div class="card-body2">
+                      <h5 class="card-title">Riese</h5>
+                      <p class="card-text">
+                        Boss #4
+                      </p>
+                  
+                    </div>
+                  </div>
             </div>
         </div>
     </div>
-
+    <h1>Location</h1>
+    <div id="map" class="map" style="align-items: center;">
+        <!-- embedded map -->
+    </div>
 {% endblock %}
