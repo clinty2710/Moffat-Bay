@@ -182,6 +182,15 @@ def edit_reservation(reservation_id):
     form = NewReservation(obj=reservation)
 
     if form.validate_on_submit():
+        start_date = form.start_date.data
+        end_date = form.end_date.data
+        if start_date > end_date:
+            flash('Please select a valid date range.', 'danger')
+            return redirect(url_for('new_reservation'))
+        if start_date < datetime.date.today():
+            flash('Please select a valid date (after today).', 'danger')
+            return redirect(url_for('new_reservation'))
+            
         if form.confirmation.data:
             form.populate_obj(reservation)
             db.session.commit()
