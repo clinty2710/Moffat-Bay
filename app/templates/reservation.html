@@ -296,24 +296,28 @@ $(document).ready(function () {
       }
     ]
   });
+  var num_of_days = 1;
   $('#num_of_guests').on('change', function () {
     var selectedGuests = $(this).val();
     if (selectedGuests > 0) {
-      $.ajax({
-        url: '/get_room_price',
-        type: 'GET',
-        data: { num_of_guests: selectedGuests },
-        success: function (response) {
-          console.log('Room Price:', response); // Add this line for debugging
-          var roomPrice = response;
-          $('#room_price').text(roomPrice);
-        },        
-        error: function (error) {
-          console.error(error);
-        }
-      });
+      updatePrice(selectedGuests, num_of_days);
     }
   });
+  function updatePrice(num_of_guests, num_of_days) {
+    $.ajax({
+      url: '/get_room_price',
+      type: 'GET',
+      data: { num_of_guests: num_of_guests, num_of_days: num_of_days },
+      success: function (response) {
+        console.log('Room Price:', response); // Added this line for debugging
+        var roomPrice = response;
+        $('#room_price').text(roomPrice);
+      },        
+      error: function (error) {
+        console.error(error);
+      }
+    });
+  }
   $('#room_number').on('change', function () {
     var selectedRoom = $(this).val();
 
@@ -323,14 +327,17 @@ $(document).ready(function () {
     // Select the area corresponding to the selected room
     image.mapster('set', true, 'room_' + selectedRoom);
   });
-
+  
   $('#start_date, #end_date').on('change', function () {
- 
   // Get the selected start and end dates
   var startDate = $('#start_date').val();
   var endDate = $('#end_date').val();
-
-  if (new Date(startDate) > new Date(endDate)) {
+  num_of_days = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
+  num_of_days = Math.round(num_of_days);
+  if (num_of_days > 0) {
+    updatePrice($('#num_of_guests').val(), num_of_days);
+  }
+  if (num_of_days < 1) {
     var alertContainer = $('#alert-container');
     alertContainer.text('The start date must be before the end date.');
     $('#end_date').val('');
@@ -417,7 +424,7 @@ $(document).ready(function () {
       //console.log(roomKey + ' is unavailable, not selectable, and marked in red (disabled)');
     }
   }
-  });
+});
 </script>
 
 {% endblock %}

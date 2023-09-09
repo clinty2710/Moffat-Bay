@@ -136,7 +136,7 @@ def new_reservation():
             start_date = form.start_date.data
             end_date = form.end_date.data
             num_of_guests = form.num_of_guests.data
-            room_price = price_of_room(num_of_guests)
+            room_price = price_of_room(num_of_guests) * (end_date - start_date).days
 
             if start_date > end_date:
                 flash('Please select a valid date range.', 'danger')
@@ -193,7 +193,8 @@ def edit_reservation(reservation_id):
 
         if form.confirmation.data:
             form.populate_obj(reservation)
-            reservation.price = price_of_room(reservation.num_of_guests)
+            #price of room * number of days:
+            reservation.price = price_of_room(reservation.num_of_guests) * (reservation.end_date - reservation.start_date).days
             #check if date is already taken by someone else
             reservations = Reservation.query.filter(
                 and_(
@@ -271,8 +272,9 @@ def get_room_availability():
 @app.route('/get_room_price', methods=['GET'])
 def get_room_price():
     num_of_guests = request.args.get('num_of_guests')
+    num_of_days = int(request.args.get('num_of_days', 1))
     if num_of_guests:
-        price = "Price: $" + str(price_of_room(num_of_guests))
+        price = "Price: $" + str(price_of_room(num_of_guests) * num_of_days)
         return jsonify(price)
     else:
         return jsonify(None)
