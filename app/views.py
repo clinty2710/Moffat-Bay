@@ -52,6 +52,7 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
+        session['user_id'] = new_user.uid #login a user automatically when registering.
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
