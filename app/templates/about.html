@@ -10,7 +10,7 @@
 {% block title %} About Us {% endblock %}
 
 {% block content %}
-<h1><br>About Us</h1>
+<h1>About Us</h1>
     <div class="container_about">
         <div class="left" style="text-align: center; min-width: 400px;">
             <h2>Our History</h2><br>
@@ -22,13 +22,25 @@
                 The lodge's commitment to preserving the natural environment while providing exceptional guest
                 experiences has been the cornerstone of its success.</p>
 
-            <h2><br>Contact Information</h2>
-            <address>
-                <p>123 Pinedrona Lane</p>
-                <p>San Juan Island, Washington 98250</p>
-                <p>Email: moffatbaylodge@fake.com</p>
-                <p>Phone: (123) 456-7890</p>
-            </address>
+            <h4>We'd love to hear from you!</h4>
+            <form id="contactForm">
+              <div class="mb-3">
+                  <label for="userName" class="form-label">Name:</label>
+                  <input type="text" id="userName" class="form-control" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="userEmail" class="form-label">Email:</label>
+                  <input type="email" id="userEmail" class="form-control" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="userMessage" class="form-label">Message:</label>
+                  <textarea class="form-control" id="userMessage" rows="4" required></textarea>
+              </div>
+
+              <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+          </form>
         </div>
         <div class="vr"></div>
         <div class="right" style="text-align: center; min-width: 400px;">
@@ -103,7 +115,13 @@
             </div>
         </div>
     </div>
-    <h1>Location</h1><br>
+    <h2>Contact Information</h2>
+    <address style="text-align: center;">
+        <p>123 Pinedrona Lane</p>
+        <p>San Juan Island, Washington 98250</p>
+        <p>Email: moffatbaylodge@fake.com</p>
+        <p>Phone: (123) 456-7890</p>
+    </address>
     <div id="map" class="map">
         <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d5284.227548022087!2d-122.98264053484507!3d48.531051296648975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDjCsDMxJzUwLjkiTiAxMjLCsDU4JzQ2LjYiVw!5e0!3m2!1sen!2sus!4v1694220928850!5m2!1sen!2sus" width="550" height="400" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
