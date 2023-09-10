@@ -309,9 +309,12 @@ def global_search():
                     flash('Email address not found.', 'danger')
 
             if reservation:
-                query = query.filter(Reservation.rid == reservation)
-                if not email:
-                    email = Reservation.query.filter_by(rid=reservation).first().user.Email
+                if email:
+                    query = query.filter(Reservation.rid == reservation, Reservation.user_id == user.uid)
+                else:
+                    query = query.filter(Reservation.rid == reservation)
+                    if not email:
+                        email = Reservation.query.filter_by(rid=reservation).first().user.Email
 
             reservations = query.all()
 
@@ -319,3 +322,4 @@ def global_search():
                 flash('No reservations found.', 'warning')
 
     return render_template('global_search.html', form=form, reservations=reservations, email=email)
+
