@@ -239,6 +239,9 @@ def show_reservations():
 
 @app.route('/delete_reservation')
 def delete_reservation():
+    if not session.get('user_id'):
+        flash('Please login to delete a reservation.', 'info')
+        return redirect(url_for('login', next=request.url))
     reservation_id = request.args.get('reservation_id')
     reservation = Reservation.query.get(reservation_id)
     if reservation is None:
