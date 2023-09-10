@@ -65,7 +65,8 @@ def login():
         if user and bcrypt.checkpw(form.password.data.encode('utf-8'), user.Password.encode('utf-8')):
             session['user_id'] = user.uid  # Store user's ID in the session
             flash('Logged in successfully!', 'info')
-            return redirect(url_for('index'))
+            next_url = request.args.get('next', '/')
+            return redirect(next_url)
         else:
             flash('Login failed. Please check your email and password.', 'danger')
     return render_template('login.html', form=form)
@@ -125,7 +126,7 @@ def profile():
 def new_reservation():
     if not session.get('user_id'):
         flash('Please login to make a reservation.', 'info')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', next=request.url))
 
     form = NewReservation()
     reservation_id = None 
@@ -167,7 +168,7 @@ def new_reservation():
 def edit_reservation(reservation_id):
     if not session.get('user_id'):
         flash('Please login to edit a reservation.', 'info')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', next=request.url))
 
     reservation = Reservation.query.get(reservation_id)
 
@@ -227,7 +228,7 @@ def price_of_room(num_guests):
 def show_reservations():
     if not session.get('user_id'):
         flash('Please login to view your reservations.', 'info')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', next=request.url))
     reservations = Reservation.query.filter_by(user_id=session['user_id']).all()
     return render_template('show_reservations.html', reservations=reservations)
 
@@ -250,7 +251,7 @@ def delete_reservation():
 def get_room_availability():
     if not session.get('user_id'):
         flash('Please login to view room availability.', 'info')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', next=request.url))
 
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
