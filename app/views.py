@@ -108,7 +108,8 @@ def profile():
             user.Password = hashed_password
 
         # Update the user's information based on the form data
-        user.Email = form.Email.data
+        #below line commented out to stop changing the email address
+        #user.Email = form.Email.data
         user.First_name = form.First_name.data
         user.Last_name = form.Last_name.data
         user.Phone_number = form.Phone_number.data
