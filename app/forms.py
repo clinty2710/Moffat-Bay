@@ -50,5 +50,10 @@ class NewReservation(FlaskForm):
 class ConfirmReservation(FlaskForm):
     submit = SubmitField('Confirm Reservation')
 
+class SearchByEmailOrRID(FlaskForm):
+    email = StringField('Email', validators=[Email()])
+    reservation = IntegerField('Reservation ID')
+    submit = SubmitField('Search')
+
 
 

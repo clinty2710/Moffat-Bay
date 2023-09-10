@@ -1,0 +1,96 @@
+<!--
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
+    CSD460 Capstone Project
+
+    globalsearch.html
+-->
+
+{% extends 'base.html' %}
+
+{% block title %} Global Search {% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Global Search</h1>
+    <form method="POST" action="/global_search">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class="form-control", placeholder="Enter Email") }}
+        </div>
+        <div class="form-group">
+            {{ form.reservation.label }}
+            {{ form.reservation(class="form-control", placeholder="Enter Reservation ID") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if reservations %}
+        <h2 class="mt-4">Search Results:</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Reservation ID</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ email }}</td>
+                        <td>{{ reservation.rid }}</td>
+                        <td><a class="btn btn-primary btn-sm" data-toggle="modal"  
+                            data-target="#reservationModal" 
+                            data-reservation-id="{{ reservation.rid }}"
+                            data-email="{{ email }}" 
+                            data-reservation-start-date="{{ reservation.start_date }}"
+                            data-reservation-end-date="{{ reservation.end_date }}"
+                            data-reservation-room-id="{{ reservation.room_number }}"
+                            >View</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+<div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reservationModalLabel">Reservation Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Reservation ID: <span id="modalReservationId"></span></p>
+                <p>Email Address: <span id="modalEmail"></span></p>
+                <p>Start Date: <span id="modalStartDate"></span></p>
+                <p>End Date: <span id="modalEndDate"></span></p>
+                <p>Room ID: <span id="modalRoomId"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#reservationModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+
+            modal.find('.modal-title').text('Reservation Details');
+            modal.find('#modalReservationId').text(button.data('reservation-id'));
+            modal.find('#modalEmail').text(button.data('email'));
+            modal.find('#modalStartDate').text(button.data('reservation-start-date'));
+            modal.find('#modalEndDate').text(button.data('reservation-end-date'));
+            modal.find('#modalRoomId').text(button.data('reservation-room-id'));
+
+        });
+    });
+</script>
+
+{% endblock %}

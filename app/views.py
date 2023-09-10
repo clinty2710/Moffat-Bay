@@ -7,7 +7,7 @@ import datetime
 from flask import jsonify, render_template, render_template, redirect, request, url_for, flash, session
 from sqlalchemy import and_, or_
 from app import app, User, Reservation, db
-from app.forms import LoginForm, NewReservation, RegistrationForm, ForgotPasswordForm, UpdateProfile
+from app.forms import LoginForm, NewReservation, RegistrationForm, ForgotPasswordForm, SearchByEmailOrRID, UpdateProfile
 import bcrypt
 
 
@@ -287,3 +287,35 @@ def about():
 @app.route('/attractions')
 def attractions():
     return render_template('attractions.html')
+
+@app.route('/global_search', methods=['GET', 'POST'])
+def global_search():
+    form = SearchByEmailOrRID()
+
+    email = None
+    reservations = []
+
+    if request.method == 'POST':
+        email = form.email.data
+        reservation = form.reservation.data
+
+        if email or reservation:
+            query = Reservation.query
+            if email:
+                user = User.query.filter_by(Email=email).first()
+                if user:
+                    query = query.filter(Reservation.user_id == user.uid)
+                else:
+                    flash('Email address not found.', 'danger')
+
+            if reservation:
+                query = query.filter(Reservation.rid == reservation)
+                if not email:
+                    email = Reservation.query.filter_by(rid=reservation).first().user.Email
+
+            reservations = query.all()
+
+            if not reservations:
+                flash('No reservations found.', 'warning')
+
+    return render_template('global_search.html', form=form, reservations=reservations, email=email)
