@@ -302,6 +302,21 @@ $(document).ready(function () {
     if (selectedGuests > 0) {
       updatePrice(selectedGuests, num_of_days);
     }
+    if (selectedGuests > 8) {
+      var alertContainer = $('#alert-container');
+      alertContainer.text('The maximum number of guests is 8.');
+      $('#num_of_guests').val('8');
+      alertContainer.show();
+      return false;
+    }
+    if (selectedGuests < 1) {
+      var alertContainer = $('#alert-container');
+      alertContainer.text('The minimum number of guests is 1.');
+      $('#num_of_guests').val('1');
+      alertContainer.show();
+      return false;
+    }
+    $('#alert-container').hide();
   });
   function updatePrice(num_of_guests, num_of_days) {
     $.ajax({
