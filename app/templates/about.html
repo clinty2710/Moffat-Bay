@@ -22,25 +22,25 @@
                 The lodge's commitment to preserving the natural environment while providing exceptional guest
                 experiences has been the cornerstone of its success.</p>
 
-            <h4>We'd love to hear from you!</h4>
-            <form id="contactForm">
+          <h4>We'd love to hear from you!</h4>
+            <form id="contactForm" action="mailto:recipient@example.com" method="post" enctype="text/plain">
               <div class="mb-3">
                   <label for="userName" class="form-label">Name:</label>
-                  <input type="text" id="userName" class="form-control" required>
+                  <input type="text" id="userName" class="form-control" name="Name" required>
               </div>
-
+      
               <div class="mb-3">
                   <label for="userEmail" class="form-label">Email:</label>
-                  <input type="email" id="userEmail" class="form-control" required>
+                  <input type="email" id="userEmail" class="form-control" name="Email" required>
               </div>
-
+      
               <div class="mb-3">
                   <label for="userMessage" class="form-label">Message:</label>
-                  <textarea class="form-control" id="userMessage" rows="4" required></textarea>
+                  <textarea class="form-control" id="userMessage" name="Message" rows="4" required></textarea>
               </div>
-
-              <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
-          </form>
+      
+              <button type="submit" class="btn btn-primary">Send</button>
+            </form>
         </div>
         <div class="vr"></div>
         <div class="right" style="text-align: center; min-width: 400px;">
