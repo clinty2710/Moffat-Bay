@@ -89,7 +89,7 @@
       <button type="button" class="btn btn-success btn-lg" id="openModalButton">Submit</button>
     </div>
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-top" role="document">
+    <div class="modal-dialog modal-top" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="confirmationModalLabel">Confirm Reservation</h5>
@@ -99,11 +99,35 @@
       </div>
       <div class="modal-body">
         Are you sure you want to make this reservation?
+        <!-- Show a summary of all selected options from the form -->
+        <table class="table table-bordered table-striped" style="margin: 0 auto; width: 80%;">
+          <tr>
+            <td style="width: 40%;">Start Date:</td>
+            <td><span id="confirm_start"></span></td>
+          </tr>
+          <tr>
+            <td>End Date:</td>
+            <td><span id="confirm_end"></span></td>
+          </tr>
+          <tr>
+            <td>Guests:</td>
+            <td><span id="confirm_guests"></span></td>
+          </tr>
+          <tr>
+            <td>Room Number:</td>
+            <td><span id="confirm_room"></span></td>
+          </tr>
+          <tr>
+            <td>Price:</td>
+            <td><span id="confirm_price"></span></td>
+          </tr>
+        </table>
+        <br>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="confirmationCheckbox">
           <label class="form-check-label" for="confirmationCheckbox">I confirm this reservation</label>
         </div>
-      </div>
+      </div>      
       <div class="modal-footer">
         <button type="button" id="closeModalButton2" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         {{ form.submit(class="btn btn-success") }}
@@ -116,6 +140,19 @@
 <script>
   $(document).ready(function () {
     $('#openModalButton').click(function () {
+      // Get the selected start and end dates, price, guests, and room number
+      var startDate = $('#start_date').val();
+      var endDate = $('#end_date').val();
+      var guests = $('#num_of_guests').val();
+      var room = $('#room_number').val();
+      var price = $('#room_price').text();
+      // Update the modal with the selected options
+      $('#confirm_start').text(startDate);
+      $('#confirm_end').text(endDate);
+      $('#confirm_guests').text(guests);
+      $('#confirm_room').text(room);
+      $('#confirm_price').text(price);
+      // Show the modal
       $('#confirmationModal').modal('show');
     });
 
@@ -324,6 +361,7 @@ $(document).ready(function () {
       success: function (response) {
         var roomPrice = response;
         $('#room_price').text(roomPrice);
+        $('#confirmPrice').text(roomPrice);
       },        
       error: function (error) {
         console.error(error);
