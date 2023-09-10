@@ -315,6 +315,7 @@ def global_search():
                     query = query.filter(Reservation.rid == reservation)
                     if not email:
                         email = Reservation.query.filter_by(rid=reservation).first().user.Email
+                        email = email[:3] + '...' + email[-3:]
 
             reservations = query.all()
 
