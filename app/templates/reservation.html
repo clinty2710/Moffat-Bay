@@ -35,8 +35,6 @@
       </div>
     </div>
 
-    <div id="alert-container" class="alert alert-danger mt-3" style="display: none;"></div>
-
     <!-- Number of Guests StringField -->
     <div class="col-md-2">
       <div class="form-group text-center">
@@ -44,7 +42,7 @@
         {{ form.num_of_guests(class="form-control", id=form.num_of_guests.id) }}
       </div>
     </div>
-  
+    <div id="alert-container" class="alert alert-danger mt-3" style="display: none;"></div>
     <div class="w-75">
         <img src="{{ url_for('static', filename='images/hotellayout.png') }}" alt="Hotel Layout" class="img-fluid" usemap="#image-map" id="hotel-image">
         <map name="image-map">
