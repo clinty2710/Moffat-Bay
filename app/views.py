@@ -98,6 +98,10 @@ def profile():
     user = User.query.filter_by(uid=session['user_id']).first()
     form = UpdateProfile()
 
+    if user is None:
+        flash('You must be logged in to change user information.', 'danger')
+        return redirect(url_for('login', next=request.url))
+
     if request.method == 'POST':
 
         form = UpdateProfile(request.form)
