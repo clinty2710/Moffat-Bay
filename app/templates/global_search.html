@@ -39,14 +39,14 @@
                     <tr>
                         <td>{{ email }}</td>
                         <td>{{ reservation.rid }}</td>
-                        <td><a class="btn btn-primary btn-sm" data-toggle="modal"  
+                        <td><button class="btn btn-success btn-sm" data-toggle="modal"  
                             data-target="#reservationModal" 
                             data-reservation-id="{{ reservation.rid }}"
                             data-email="{{ email }}" 
                             data-reservation-start-date="{{ reservation.start_date }}"
                             data-reservation-end-date="{{ reservation.end_date }}"
                             data-reservation-room-id="{{ reservation.room_number }}"
-                            >View</a>
+                            >View</button>
                         </td>
                     </tr>
                 {% endfor %}
