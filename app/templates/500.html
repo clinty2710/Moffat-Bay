@@ -1,0 +1,26 @@
+<!--
+    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    CSD460 Capstone Project
+
+    500.html
+-->
+
+{% extends 'base.html' %}
+
+{% block title %} 500 {% endblock %}
+{% block content %}
+    <h1>Internal Server Error</h1>
+    <p>Something went wrong on our end. We're working on it.</p>
+    <p>Try going back to the <a href="{{ url_for('index')}}">home page</a> and starting over.</p>
+    <p>I don't know what else to tell you.</p>
+
+    <p>Redirecting you in 5 seconds...</p>
+    <p>In the meantime here is a picture of a cat.</p>
+    <img src="https://c.pxhere.com/photos/88/8a/cat_lying_blue_eye_small_ginger_fur_heal_pet_animal-609263.jpg!d" alt="cat" width="500" height="500">
+
+<script>
+    setTimeout(function(){
+        window.location.href = "{{ url_for('index')}}";
+    }, 5000);
+</script>
+{% endblock %}

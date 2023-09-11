@@ -10,6 +10,13 @@ from app import app, User, Reservation, db
 from app.forms import LoginForm, NewReservation, RegistrationForm, ForgotPasswordForm, SearchByEmailOrRID, UpdateProfile
 import bcrypt
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(e):
+    return render_template('500.html'), 500
 
 #generate salt
 salt = bcrypt.gensalt()
