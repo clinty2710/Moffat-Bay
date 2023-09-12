@@ -20,41 +20,41 @@
 </head>
 <body>
     <nav class="navbar ps-1 sticky-top navbar-expand-md navbar-light bg-info">
-        <a class="navbar-brand" href="{{ url_for('index')}}">Moffat Bay Lodge</a>
+        <a class="navbar-brand" href="{{ url_for('app.index')}}">Moffat Bay Lodge</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('new_reservation') }}">Reservations</a>
+                    <a class="nav-link" href="{{ url_for('app.new_reservation') }}">Reservations</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('attractions') }}">Attractions</a>
+                    <a class="nav-link" href="{{ url_for('app.attractions') }}">Attractions</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    <a class="nav-link" href="{{ url_for('app.about') }}">About</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ url_for('app.logout') }}">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('profile') }}">
+                        <a class="nav-link" href="{{ url_for('app.profile') }}">
                             <i class="fas fa-user"></i>
                         </a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                        <a class="nav-link" href="{{ url_for('app.login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                        <a class="nav-link" href="{{ url_for('app.register') }}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}">
+                        <a class="nav-link" href="{{ url_for('app.login') }}">
                             <i class="fas fa-user"></i>
                         </a>
                     </li>
@@ -98,12 +98,12 @@
                             </a>                           
                         </div>
                         <ul class="list-unstyled" style="padding: 20px;">
-                            <li><a href="{{ url_for('index')}}">Home</a></li>
-                            <li><a href="{{ url_for('new_reservation')}}">Reservations</a></li>
+                            <li><a href="{{ url_for('app.index')}}">Home</a></li>
+                            <li><a href="{{ url_for('app.new_reservation')}}">Reservations</a></li>
                         </ul>
                         <ul class="list-unstyled" style="padding: 20px;">
-                            <li><a href="{{ url_for('about') }}">About Us</a></li>
-                            <li><a href="{{ url_for('attractions') }}">Attractions</a></li>
+                            <li><a href="{{ url_for('app.about') }}">About Us</a></li>
+                            <li><a href="{{ url_for('app.attractions') }}">Attractions</a></li>
                         </ul>
                         <div class="social-icons-right">
                             <a href="#">

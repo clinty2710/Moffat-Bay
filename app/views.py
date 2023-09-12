@@ -4,17 +4,20 @@
 #    views.py
 
 import datetime
-from flask import jsonify, render_template, render_template, redirect, request, url_for, flash, session
+from flask import jsonify, Blueprint, render_template, render_template, redirect, request, url_for, flash, session
 from sqlalchemy import and_, or_
-from app import app, User, Reservation, db
 from app.forms import LoginForm, NewReservation, RegistrationForm, ForgotPasswordForm, SearchByEmailOrRID, UpdateProfile
 import bcrypt
+from app.models import User, Reservation
 
-@app.errorhandler(404)
+bp = Blueprint('app', __name__)
+
+
+@bp.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
-@app.errorhandler(500)
+@bp.errorhandler(500)
 def internal_error(e):
     return render_template('500.html'), 500
 
@@ -22,7 +25,7 @@ def internal_error(e):
 salt = bcrypt.gensalt()
 
 #session key for user logged in
-@app.context_processor
+@bp.context_processor
 def inject_user():
     user_id = session.get('user_id')
     if user_id:
@@ -30,17 +33,17 @@ def inject_user():
         return dict(user=user)
     return dict(user=None)
 
-@app.route("/")
+@bp.route("/")
 def index():
     return render_template("index.html")
 
-@app.route('/show_database')
+@bp.route('/show_database')
 def show_database():
     users = User.query.all()
     reservations = Reservation.query.all()
     return render_template('db.html', users=users, reservations=reservations)
 
-@app.route('/register', methods=['GET', 'POST'])
+@bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -63,7 +66,7 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
-@app.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -79,7 +82,7 @@ def login():
             flash('Login failed. Please check your email and password.', 'danger')
     return render_template('login.html', form=form)
 
-@app.route('/forgot_password', methods=['GET', 'POST'])
+@bp.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'POST':
         user = User.query.filter_by(Email=request.form['Email']).first()
@@ -94,17 +97,17 @@ def forgot_password():
         flash('Please enter your email address.', 'info')
         return render_template('forgot_password.html', form=form)
 
-@app.route('/logout')
+@bp.route('/logout')
 def logout():
     session.pop('user_id', None)  # Remove user's ID from the session
     flash('Logged out successfully!', 'info')
     return redirect(url_for('index'))
 
-@app.route('/profile', methods=['GET', 'POST'])
+@bp.route('/profile', methods=['GET', 'POST'])
 def profile():
     if not session.get('user_id'):
         flash('Please login to change your profile.', 'info')
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('app.login', next=request.url))
     user = User.query.filter_by(uid=session['user_id']).first()
     form = UpdateProfile()
 
@@ -134,11 +137,11 @@ def profile():
 
     return render_template('profile.html', form=form, user=user)
 
-@app.route('/reservation/new', methods=['GET', 'POST'])
+@bp.route('/reservation/new', methods=['GET', 'POST'])
 def new_reservation():
     if not session.get('user_id'):
         flash('Please login to make a reservation.', 'info')
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('app.login', next=request.url))
 
     form = NewReservation()
     reservation_id = None 
@@ -176,11 +179,11 @@ def new_reservation():
 
     return render_template('reservation.html', reservation_id=reservation_id, form=form)
 
-@app.route('/reservation/edit/<int:reservation_id>', methods=['GET', 'POST'])
+@bp.route('/reservation/edit/<int:reservation_id>', methods=['GET', 'POST'])
 def edit_reservation(reservation_id):
     if not session.get('user_id'):
         flash('Please login to edit a reservation.', 'info')
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('app.login', next=request.url))
 
     reservation = Reservation.query.get(reservation_id)
 
@@ -236,19 +239,19 @@ def price_of_room(num_guests):
     elif guests >= 6:
         return None
 
-@app.route('/show_reservations', methods=['GET'])
+@bp.route('/show_reservations', methods=['GET'])
 def show_reservations():
     if not session.get('user_id'):
         flash('Please login to view your reservations.', 'info')
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('app.login', next=request.url))
     reservations = Reservation.query.filter_by(user_id=session['user_id']).all()
     return render_template('show_reservations.html', reservations=reservations)
 
-@app.route('/delete_reservation')
+@bp.route('/delete_reservation')
 def delete_reservation():
     if not session.get('user_id'):
         flash('Please login to delete a reservation.', 'info')
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('app.login', next=request.url))
     reservation_id = request.args.get('reservation_id')
     reservation = Reservation.query.get(reservation_id)
     if reservation is None:
@@ -262,11 +265,11 @@ def delete_reservation():
     flash('Reservation deleted successfully!', 'success')
     return redirect(url_for('show_reservations'))
 
-@app.route('/get_room_availability', methods=['GET'])
+@bp.route('/get_room_availability', methods=['GET'])
 def get_room_availability():
     if not session.get('user_id'):
         flash('Please login to view room availability.', 'info')
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('app.login', next=request.url))
 
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
@@ -285,7 +288,7 @@ def get_room_availability():
 
     return jsonify([])
 
-@app.route('/get_room_price', methods=['GET'])
+@bp.route('/get_room_price', methods=['GET'])
 def get_room_price():
     num_of_guests = request.args.get('num_of_guests')
     num_of_days = int(request.args.get('num_of_days', 1))
@@ -296,15 +299,15 @@ def get_room_price():
         return jsonify(None)
     
 
-@app.route('/about')
+@bp.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/attractions')
+@bp.route('/attractions')
 def attractions():
     return render_template('attractions.html')
 
-@app.route('/global_search', methods=['GET', 'POST'])
+@bp.route('/global_search', methods=['GET', 'POST'])
 def global_search():
     form = SearchByEmailOrRID()
 

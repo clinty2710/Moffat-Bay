@@ -11,7 +11,7 @@
 {% block content %}
     <h1>Internal Server Error</h1>
     <p>Something went wrong on our end. We're working on it.</p>
-    <p>Try going back to the <a href="{{ url_for('index')}}">home page</a> and starting over.</p>
+    <p>Try going back to the <a href="{{ url_for('app.index')}}">home page</a> and starting over.</p>
     <p>I don't know what else to tell you.</p>
 
     <p>Redirecting you in 5 seconds...</p>
@@ -20,7 +20,7 @@
 
 <script>
     setTimeout(function(){
-        window.location.href = "{{ url_for('index')}}";
+        window.location.href = "{{ url_for('app.index')}}";
     }, 5000);
 </script>
 {% endblock %}

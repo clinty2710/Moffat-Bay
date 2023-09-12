@@ -27,8 +27,7 @@ if __name__ == "__main__":
     else:
         app.debug = False
 
-    from app import views  # only way i could get this to work, should probably fix this
-    app.config['SECRET_KEY'] = 'TheQuickBrownFoxJumpsOverTheLazyDog'
-    app.secret_key = secrets.token_hex(16)
+
+
     toolbar = DebugToolbarExtension(app)
     app.run()

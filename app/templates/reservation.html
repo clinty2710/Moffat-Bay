@@ -14,7 +14,7 @@
 
 <div class="container">
 <!-- Reservation form -->
-<form method="POST" action="{% if reservation_id is none %}{{ url_for('new_reservation') }}{% else %}{{ url_for('edit_reservation', reservation_id=reservation_id) }}{% endif %}" id="form">
+<form method="POST" action="{% if reservation_id is none %}{{ url_for('app.new_reservation') }}{% else %}{{ url_for('app.edit_reservation', reservation_id=reservation_id) }}{% endif %}" id="form">
   {{ form.hidden_tag() }}
   <input type="hidden" name="confirmation" value="true">
   <div class="form-group text-center">

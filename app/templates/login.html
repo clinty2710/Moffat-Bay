@@ -11,7 +11,7 @@
 
 {% block content %}
     <h2><br>Login</h2>
-    <p>Don't have an account? Create one here <a href="{{ url_for('register') }}">
+    <p>Don't have an account? Create one here <a href="{{ url_for('app.register') }}">
     <button type="submit" class="btn btn-primary btn-sm">Register</button>   
     </a></p>
     <form class="form" action="" method="post" style="margin-bottom: 300px">
@@ -24,7 +24,7 @@
             <label for="{{ form.password.id }}" class="form-label required-field">Password</label>
             {{ form.password(class="form-control", required="required") }}
         </div>
-        <p> <a href="{{ url_for('forgot_password') }}" class="btn btn-primary">Forgot Password?</a></p>
+        <p> <a href="{{ url_for('app.forgot_password') }}" class="btn btn-primary">Forgot Password?</a></p>
         <button type="submit" class="btn btn-success btn-lg">Login</button>
 
     </form>

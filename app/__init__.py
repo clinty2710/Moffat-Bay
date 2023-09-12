@@ -4,7 +4,7 @@
 #    __init__.py
 
 
-from flask import Flask
+from flask import Flask, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_wtf import CSRFProtect
@@ -22,35 +22,15 @@ cache = Cache(config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': 300})  # 
 cache.init_app(app)
 bootstrap = Bootstrap(app)
 csrf = CSRFProtect(app)
+secret_key = "TheQuickBrownFoxJumpsOverTheLazyDog"
+app.secret_key = secret_key
 
-# Configure the database connection URI
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql://{os.environ['DB_USER']}:{os.environ['DB_PASSWORD']}@{os.environ['DB_HOST']}/{os.environ['DB_DATABASE']}"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize SQLAlchemy
-db = SQLAlchemy(app)
-
-# Define User and Reservation models
-class User(db.Model):
-    uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    Email = db.Column(db.String(255), nullable=False)
-    First_name = db.Column(db.String(255))
-    Last_name = db.Column(db.String(255))
-    Phone_number = db.Column(db.String(20))
-    Password = db.Column(db.String(255))
-    reservations = db.relationship('Reservation', backref='user', lazy=True)
-
-class Reservation(db.Model):
-    rid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    start_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
-    room_number = db.Column(db.String(10))
-    num_of_guests = db.Column(db.Integer)
-    price = db.Column(db.Float)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.uid'))  # Foreign key to User table
+from . import views
+app.register_blueprint(views.bp)
 
 # Function to create tables and insert sample data
 def create_tables():
+    from .models import db, User, Reservation
     with app.app_context():
         try:
             # Create the database if it doesn't exist
