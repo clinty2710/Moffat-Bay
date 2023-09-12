@@ -9,6 +9,7 @@ from sqlalchemy import and_, or_
 from app.forms import LoginForm, NewReservation, RegistrationForm, ForgotPasswordForm, SearchByEmailOrRID, UpdateProfile
 import bcrypt
 from app.models import User, Reservation
+from app.db import db
 
 bp = Blueprint('app', __name__)
 
