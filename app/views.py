@@ -63,7 +63,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         session['user_id'] = new_user.uid #login a user automatically when registering.
-        return redirect(url_for('index'))
+        return redirect(url_for('app.index'))
     return render_template('register.html', form=form)
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -88,10 +88,10 @@ def forgot_password():
         user = User.query.filter_by(Email=request.form['Email']).first()
         if user:
             flash('Please check your email for a password reset link.', 'info')
-            return redirect(url_for('index'))
+            return redirect(url_for('app.index'))
         else:
             flash('Email address not found.', 'danger')
-            return redirect(url_for('forgot_password'))
+            return redirect(url_for('app.forgot_password'))
     else:
         form = ForgotPasswordForm()
         flash('Please enter your email address.', 'info')
@@ -101,7 +101,7 @@ def forgot_password():
 def logout():
     session.pop('user_id', None)  # Remove user's ID from the session
     flash('Logged out successfully!', 'info')
-    return redirect(url_for('index'))
+    return redirect(url_for('app.index'))
 
 @bp.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -156,10 +156,10 @@ def new_reservation():
 
             if start_date > end_date:
                 flash('Please select a valid date range.', 'danger')
-                return redirect(url_for('new_reservation'))
+                return redirect(url_for('app.new_reservation'))
             if start_date < datetime.date.today():
                 flash('Please select a valid date (after today).', 'danger')
-                return redirect(url_for('new_reservation'))
+                return redirect(url_for('app.new_reservation'))
             
             new_reservation = Reservation(
                 room_number=room_number,
@@ -173,7 +173,7 @@ def new_reservation():
             db.session.commit()
 
             flash('Reservation added successfully!', 'success')
-            return redirect(url_for('show_reservations'))
+            return redirect(url_for('app.show_reservations'))
         else:
             return render_template('reservation.html', reservation_id=reservation_id, form=form)
 
@@ -189,11 +189,11 @@ def edit_reservation(reservation_id):
 
     if reservation is None:
         flash('Reservation not found.', 'danger')
-        return redirect(url_for('show_reservations'))
+        return redirect(url_for('app.show_reservations'))
 
     if reservation.user_id != session['user_id']:
         flash('You do not have permission to edit this reservation.', 'danger')
-        return redirect(url_for('show_reservations'))
+        return redirect(url_for('app.show_reservations'))
 
     form = NewReservation(obj=reservation)
 
@@ -202,10 +202,10 @@ def edit_reservation(reservation_id):
         end_date = form.end_date.data
         if start_date > end_date:
             flash('Please select a valid date range.', 'danger')
-            return redirect(url_for('new_reservation'))
+            return redirect(url_for('app.new_reservation'))
         if start_date < datetime.date.today():
             flash('Please select a valid date (after today).', 'danger')
-            return redirect(url_for('new_reservation'))
+            return redirect(url_for('app.new_reservation'))
 
         if form.confirmation.data:
             form.populate_obj(reservation)
@@ -221,10 +221,10 @@ def edit_reservation(reservation_id):
             for r in reservations:
                 if r.room_number == reservation.room_number and r.rid != reservation.rid:
                     flash('Room is already reserved for that date.', 'danger')
-                    return redirect(url_for('edit_reservation', reservation_id=reservation_id))
+                    return redirect(url_for('app.edit_reservation', reservation_id=reservation_id))
             db.session.commit()
             flash('Reservation updated successfully!', 'success')
-            return redirect(url_for('show_reservations'))
+            return redirect(url_for('app.show_reservations'))
         else:
             return render_template('reservation.html', form=form, reservation_id=reservation_id)
 
@@ -256,14 +256,14 @@ def delete_reservation():
     reservation = Reservation.query.get(reservation_id)
     if reservation is None:
         flash('Reservation not found.', 'danger')
-        return redirect(url_for('show_reservations'))
+        return redirect(url_for('app.show_reservations'))
     if reservation.user_id != session['user_id']:
         flash('You do not have permission to delete this reservation.', 'danger')
-        return redirect(url_for('show_reservations'))
+        return redirect(url_for('app.show_reservations'))
     db.session.delete(reservation)
     db.session.commit()
     flash('Reservation deleted successfully!', 'success')
-    return redirect(url_for('show_reservations'))
+    return redirect(url_for('app.show_reservations'))
 
 @bp.route('/get_room_availability', methods=['GET'])
 def get_room_availability():
