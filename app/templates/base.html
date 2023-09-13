@@ -40,6 +40,11 @@
             <ul class="navbar-nav ml-auto">
                 {% if user %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('app.global_search') }}">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('app.logout') }}">Logout</a>
                     </li>
                     <li class="nav-item" style="margin-right: 20px;">
@@ -99,10 +104,10 @@
                 <div class="text-center">
                     <div class="link-columns">
                         <div class="social-icons-left">
-                            <a href="#">
+                            <a href="https://www.facebook.com/" target="_blank">
                                 <i class="fa-brands fa-facebook-f fa-2x" style="color: #005eff; padding: 20px;"></i>
                             </a>
-                            <a href="#">
+                            <a href="https://www.x.com/" target="_blank">
                                 <i class="fa-brands fa-x-twitter fa-2x" style="color: black; padding: 20px;"></i>
                             </a>                           
                         </div>
@@ -115,10 +120,10 @@
                             <li><a href="{{ url_for('app.attractions') }}">Attractions</a></li>
                         </ul>
                         <div class="social-icons-right">
-                            <a href="#">
+                            <a href="https://www.instagram.com/" target="_blank">
                                 <i class="fa fa-instagram fa-2x" style="padding: 20px"></i>
                             </a>
-                            <a href="#">
+                            <a href="https://www.linkedin.com/" target="_blank">
                                 <i class="fa-brands fa-linkedin fa-2x" style="color: #0058f0; padding: 20px;"></i>
                             </a>
                         </div>
