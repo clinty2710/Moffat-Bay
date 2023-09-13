@@ -23,14 +23,14 @@
             {{ form.reservation(class="form-control", placeholder="Enter Reservation ID") }}
         </div>
         <div style="text-align: center; margin-top: 10px;">
-        <button type="submit" class="btn btn-success">Search</button>
+        <button type="submit" class="btn btn-success btn-lg">Search</button>
         </div>
         <div style="text-align: center; margin-top: 10px;">
             <a href="{{ url_for('app.new_reservation') }}">
-                <button type="button" class="btn btn-primary btn-md">Add Reservation</button></a>
+                <button type="button" class="btn btn-primary btn-sm">Add Reservation</button></a>
         </div>
         <div style="text-align: center; margin-top: 10px;">
-            <a href="{{url_for('app.show_reservations')}}" class="btn btn-primary btn-md">Show All Reservations</a>
+            <a href="{{url_for('app.show_reservations')}}" class="btn btn-primary btn-sm">Show All Reservations</a>
         </div>
     </form>
 
