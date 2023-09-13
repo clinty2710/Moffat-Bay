@@ -7,23 +7,15 @@
 -->
 
 {% extends 'base.html' %}
-<!-- 
-    Extend the 'base.html' template to inherit common structure and styles.
--->
 
 {% block title %}
     Database Dump
 {% endblock %}
-<!-- 
-    Define the 'title' block for setting the title of the webpage.
-    In this case, the title will be 'Database Dump'.
--->
 
 {% block content %}
     <h1><br>Database Dump</h1>
     <!-- 
         Display the main heading of the page: 'Database Dump'.
-        The <br> tag adds some vertical space below the heading.
     -->
 
     <table>
@@ -34,14 +26,10 @@
             <th>Last Name</th>
             <th>Phone Number</th>
         </tr>
-        <!-- 
-            Create a table to display user data with column headers.
-        -->
+        <!-- Create a table to display user data with column headers. -->
 
         {% for user in users %}
-        <!-- 
-            Loop through the 'users' data and display each user's information.
-        -->
+        <!-- Loop through the 'users' data and display each user's information. -->
         <tr>
             <td>{{ user.uid }}</td>
             <td>{{ user.Email }}</td>
@@ -49,9 +37,7 @@
             <td>{{ user.Last_name }}</td>
             <td>{{ user.Phone_number }}</td>
         </tr>
-        <!-- 
-            Display user information in each row.
-        -->
+        <!-- Display user information in each row. -->
         {% endfor %}
         <!-- End of user data loop. -->
     </table>
@@ -67,14 +53,10 @@
             <th>Number of Guests</th>
             <th>User ID</th>
         </tr>
-        <!-- 
-            Create another table to display reservation data with column headers.
-        -->
+        <!-- Create another table to display reservation data with column headers.-->
 
         {% for reservation in reservations %}
-        <!-- 
-            Loop through the 'reservations' data and display each reservation's information.
-        -->
+        <!-- Loop through the 'reservations' data and display each reservation's information. -->
         <tr>
             <td>{{ reservation.rid }}</td>
             <td>{{ reservation.start_date }}</td>
@@ -83,9 +65,7 @@
             <td>{{ reservation.num_of_guests }}</td>
             <td>{{ reservation.user_id }}</td>
         </tr>
-        <!-- 
-            Display reservation information in each row.
-        -->
+        <!-- Display reservation information in each row. -->
         {% endfor %}
         <!-- End of reservation data loop. -->
     </table>
