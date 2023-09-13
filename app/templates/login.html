@@ -24,7 +24,7 @@
             <label for="{{ form.password.id }}" class="form-label required-field">Password</label>
             {{ form.password(class="form-control", required="required") }}
         </div>
-        <p> <a href="{{ url_for('app.forgot_password') }}" class="btn btn-primary">Forgot Password?</a></p>
+        <p> <a href="{{ url_for('app.forgot_password') }}" class="btn btn-primary btn-sm">Forgot Password?</a></p>
         <button type="submit" class="btn btn-success btn-lg">Login</button>
 
     </form>
