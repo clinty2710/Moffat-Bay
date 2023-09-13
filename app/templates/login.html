@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 <!--
-    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
     CSD460 Capstone Project
 
     login.html
@@ -10,26 +10,41 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
+    <!-- Page Title -->
     <h2><br>Login</h2>
-    <p>Don't have an account? Create one here <a href="{{ url_for('app.register') }}">
-    <button type="submit" class="btn btn-primary btn-sm">Register</button>   
-    </a></p>
+
+    <!-- Registration Link -->
+    <p>Don't have an account? Create one here 
+        <a href="{{ url_for('app.register') }}">
+            <button type="submit" class="btn btn-primary btn-sm">Register</button>   
+        </a>
+    </p>
+
+    <!-- Login Form -->
     <form class="form" action="" method="post" style="margin-bottom: 100px">
         {{ form.hidden_tag() }}
+
+        <!-- Username Field -->
         <div class="form-group">
             <label for="{{ form.username.id }}" class="form-label required-field">Email</label>
             {{ form.username(class="form-control", required="required") }}
         </div>
+
+        <!-- Password Field -->
         <div class="form-group">
             <label for="{{ form.password.id }}" class="form-label required-field">Password</label>
             {{ form.password(class="form-control", required="required") }}
         </div>
+
+        <!-- Forgot Password Link -->
         <p> <a href="{{ url_for('app.forgot_password') }}" class="btn btn-primary btn-sm">Forgot Password?</a></p>
+
+        <!-- Login Button -->
         <button type="submit" class="btn btn-success btn-lg">Login</button>
     </form>
 
-    <p style="text-align: center;">Look up reservation without logging in<br>
+    <!-- Reservation Lookup Link -->
+    <p style="text-align: center;">Look up a reservation without logging in<br>
         <a href="{{ url_for('app.global_search') }}" class="btn btn-primary" 
         style="margin-top: 20px; margin-bottom: 50px;">Click Here</a></p>
-
 {% endblock %}

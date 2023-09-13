@@ -6,11 +6,18 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Show Reservations {% endblock %}
+{% block title %}
+    Show Reservations
+{% endblock %}
+
 {% block content %}
+    <!-- Header -->
     <h1><br>Reservations</h1><br><br>
+
+    <!-- Table for displaying reservations -->
     <table class="table table-striped">
         <thead>
+            <!-- Table header row -->
             <tr>
                 <th>Reservation ID</th>
                 <th>Room Number</th>
@@ -22,6 +29,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Loop through each reservation and display its details -->
             {% for reservation in reservations %}
                 <tr>
                     <td>{{ reservation.rid }}</td>
@@ -29,21 +37,24 @@
                     <td>{{ reservation.start_date }}</td>
                     <td>{{ reservation.end_date }}</td>
                     <td>{{ reservation.num_of_guests }}</td>
+                    <!-- Format the price as currency -->
                     <td>${{ '%.2f'|format(reservation.price) }}</td>
                     <td>
+                        <!-- Buttons for editing and deleting reservations -->
                         <div class="btn-group" role="group">
                             <a href="{{ url_for('app.edit_reservation', reservation_id=reservation.rid) }}" class="btn btn-primary btn-sm">Edit</a>
                             <a href="{{ url_for('app.delete_reservation', reservation_id=reservation.rid) }}" class="btn btn-danger btn-sm">Delete</a>
-                          </div>                        
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-    <div style="text-align: center; padding: 10px; font-size: x-large;">
-    <a href="{{ url_for('app.new_reservation') }}">
-        <button type="button" class="btn btn-success btn-lg">Add Reservation</button>
-    </a>
-    </div>
 
+    <!-- Button to add a new reservation -->
+    <div style="text-align: center; padding: 10px; font-size: x-large;">
+        <a href="{{ url_for('app.new_reservation') }}">
+            <button type="button" class="btn btn-success btn-lg">Add Reservation</button>
+        </a>
+    </div>
 {% endblock %}

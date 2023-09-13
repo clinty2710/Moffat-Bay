@@ -1,14 +1,16 @@
 <!--
-    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
     CSD460 Capstone Project
 
-    404.html
+    404.html - Custom 404 Error Page
 -->
 
 {% extends 'base.html' %}
 
 {% block title %} 404 {% endblock %}
+
 {% block content %}
+    <!-- 404 page content -->
     <h1>This Link Does Not Exist</h1>
     <p>Sorry, but the page you were trying to view does not exist.</p>
 
@@ -18,10 +20,10 @@
     <p>In the meantime here is a picture of a cat.</p>
     <img src="https://c.pxhere.com/photos/88/8a/cat_lying_blue_eye_small_ginger_fur_heal_pet_animal-609263.jpg!d" alt="cat" width="500">
 
-
-<script>
-    setTimeout(function(){
-        window.location.href = "{{ url_for('app.index')}}";
-    }, 5000);
-</script>
+    <script>
+        // Redirect the user to the home page after a 5-second delay
+        setTimeout(function(){
+            window.location.href = "{{ url_for('app.index')}}";
+        }, 5000);
+    </script>
 {% endblock %}

@@ -1,14 +1,16 @@
 <!--
-    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
     CSD460 Capstone Project
 
-    500.html
+    500.html - Custom 500 Internal Server Error Page
 -->
 
 {% extends 'base.html' %}
 
 {% block title %} 500 {% endblock %}
+
 {% block content %}
+    <!-- 500 page content -->
     <h1>Internal Server Error</h1>
     <p>Something went wrong on our end. We're working on it.</p>
     <p>Try going back to the <a href="{{ url_for('app.index')}}">home page</a> and starting over.</p>
@@ -18,9 +20,10 @@
     <p>In the meantime here is a picture of a cat.</p>
     <img src="https://c.pxhere.com/photos/88/8a/cat_lying_blue_eye_small_ginger_fur_heal_pet_animal-609263.jpg!d" alt="cat" width="500" height="500">
 
-<script>
-    setTimeout(function(){
-        window.location.href = "{{ url_for('app.index')}}";
-    }, 5000);
-</script>
+    <script>
+        // Redirect the user to the home page after a 5-second delay
+        setTimeout(function(){
+            window.location.href = "{{ url_for('app.index')}}";
+        }, 5000);
+    </script>
 {% endblock %}

@@ -1,8 +1,8 @@
 <!--
-    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
     CSD460 Capstone Project
 
-    base.html
+    base.html - This is the base template for the Moffat Bay Lodge website.
 -->
 
 <!DOCTYPE html>
@@ -11,22 +11,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
+    <!-- Include Bootstrap CSS from CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Include Bootstrap 5 CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Include custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Include jQuery library from CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar ps-1 sticky-top navbar-expand-md navbar-light bg-info">
+        <!-- Moffat Bay Lodge Logo -->
         <img src="{{ url_for('static', filename='images/salmon.png') }}" style="max-width: 80px; max-height: 30px; margin-left: 20px;" />
+        <!-- Moffat Bay Lodge Brand -->
         <a class="navbar-brand" href="{{ url_for('app.index')}}">Moffat Bay Lodge</a>
+        <!-- Toggle Button for Mobile -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <!-- Navigation Links -->
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('app.new_reservation') }}">Reservations</a>
                 </li>
@@ -38,10 +46,11 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                <!-- Conditional Navigation Links (based on user login status) -->
                 {% if user %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('app.global_search') }}">
-                            <i class="fas fa-magnifying-glass"></i>
+                            <i class="fas fa-search"></i> <!-- Search Icon -->
                         </a>
                     </li>
                     <li class="nav-item">
@@ -49,13 +58,13 @@
                     </li>
                     <li class="nav-item" style="margin-right: 20px;">
                         <a class="nav-link" href="{{ url_for('app.profile') }}">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-user"></i> <!-- User Icon -->
                         </a>
                     </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('app.global_search') }}">
-                            <i class="fas fa-magnifying-glass"></i>
+                            <i class="fas fa-search"></i> <!-- Search Icon -->
                         </a>
                     </li>
                     <li class="nav-item">
@@ -66,13 +75,15 @@
                     </li>
                     <li class="nav-item" style="margin-right: 10px;">
                         <a class="nav-link" href="{{ url_for('app.login') }}">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-user"></i> <!-- User Icon -->
                         </a>
                     </li>
                 {% endif %}
-            </ul>            
+            </ul>
         </div>
     </nav>
+
+    <!-- Flash Messages -->
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -87,15 +98,18 @@
                 {% endfor %}
             </div>
         {% endif %}
-    {% endwith %}    
+        {% endwith %}
+        <!-- Content Block -->
         {% block content %} {% endblock %}
     </div>
-
+    <!-- Footer Section -->
     <footer class="footer">
         <div class="container">
+            <!-- Divider Image -->
                 <img class="divider" src="{{ url_for('static', filename='images/divider.png') }}" alt="divider" style="min-width: auto;">
             <div class="row">
                 <div style="margin-top: 20px; margin-bottom: 5px;">
+                    <!-- Moffat Bay Lodge Logo (Small) -->
                     <img src="{{ url_for('static', filename='images/salmon.png') }}" style="max-width: 100px; max-height: 50px;" />
                 </div>
                 <div class="text-center">
@@ -104,6 +118,7 @@
                 <div class="text-center">
                     <div class="link-columns">
                         <div class="social-icons-left">
+                            <!-- Social Media Links (Facebook and Twitter) -->
                             <a href="https://www.facebook.com/" target="_blank">
                                 <i class="fa-brands fa-facebook-f fa-2x" style="color: #005eff; padding: 20px;"></i>
                             </a>
@@ -112,14 +127,17 @@
                             </a>                           
                         </div>
                         <ul class="list-unstyled" style="padding: 20px;">
+                            <!-- Footer Links (Home and Reservations) -->
                             <li><a href="{{ url_for('app.index')}}">Home</a></li>
                             <li><a href="{{ url_for('app.new_reservation')}}">Reservations</a></li>
                         </ul>
                         <ul class="list-unstyled" style="padding: 20px;">
+                            <!-- Footer Links (About Us and Attractions) -->
                             <li><a href="{{ url_for('app.about') }}">About Us</a></li>
                             <li><a href="{{ url_for('app.attractions') }}">Attractions</a></li>
                         </ul>
                         <div class="social-icons-right">
+                            <!-- Social Media Links (Instagram and LinkedIn) -->
                             <a href="https://www.instagram.com/" target="_blank">
                                 <i class="fa fa-instagram fa-2x" style="padding: 20px"></i>
                             </a>
@@ -132,7 +150,7 @@
             </div>
         </div>
     </footer>      
-
+    <!-- Include JavaScript libraries -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

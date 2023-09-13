@@ -1,5 +1,5 @@
 <!--
-    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
     CSD460 Capstone Project
 
     index.html
@@ -7,97 +7,113 @@
 
 {% extends 'base.html' %}
 
+{% block title %}
+    <!-- Define the title for this page -->
+    Moffat Bay Lodge
+{% endblock %}
 
-{% block title %} Moffat Bay Lodge {% endblock %}
 {% block content %}
+<!-- Define the content for this page -->
 
 <div class="container">
-  <img src="{{ url_for('static', filename='images/bannertitle2.png') }}" alt="Banner Image"style="max-width: 109.5%; height: auto;">
+    <!-- Container for the main content -->
+
+    <!-- Banner Image -->
+    <img src="{{ url_for('static', filename='images/bannertitle2.png') }}" alt="Banner Image" style="max-width: 109.5%; height: auto;">
+
     <div class="row content-center">
+        <!-- Center the content within a row -->
         <div class="col-md-8 offset-md-2">
+            <!-- Main text section -->
             <div class="maintxt" style="background-image: url({{ url_for('static', filename='images/waterfallhiking.png') }})">
+                <!-- Background image with text -->
                 <span class="title-line1">Adventure Awaits Here</span>
             </div>
         </div>
     </div>
 </div>
-  <p class="action-call">
-        Welcome to your next vacation<br>
-        Book your dream stay <a href="{{ url_for('app.new_reservation')}}" class="action-link">
-          <button type="submit" class="btn btn-success btn-lg" style="font-family: 'comfortaa';">NOW!</button>
-        </a>
-      </p>
-    <div class="card-columns">
-      <div class="card text-center ">
+
+<!-- Action Call Section -->
+<p class="action-call">
+    Welcome to your next vacation<br>
+    Book your dream stay <a href="{{ url_for('app.new_reservation')}}" class="action-link">
+        <button type="submit" class="btn btn-success btn-lg" style="font-family: 'comfortaa';">NOW!</button>
+    </a>
+</p>
+
+<div class="card-columns">
+    <!-- Display a grid of cards -->
+
+    <!-- Card 1: Unparalleled Beauty -->
+    <div class="card text-center ">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="{{ url_for('static', filename='images/islands.jpg') }}" class="img-fluid" />
-          <a href="#!">
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-          </a>
-        </div>
-      
-        <div class="card-body">
-          <h5 class="card-title">Unparalleled Beauty</h5>
-          <p class="card-text">
-            Be inspired by the enchanting San Juan Islands
-          </p>
-      
-      
-        </div>
-      </div>
-          <div class="card text-center ">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="{{ url_for('static', filename='images/killerwhale.jpg') }}" class="img-fluid" />
-              <a href="#!">
+            <img src="{{ url_for('static', filename='images/islands.jpg') }}" class="img-fluid" />
+            <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-              </a>
-            </div>
-          
-            <div class="card-body">
-              <h5 class="card-title">Be Amazed</h5>
-              <p class="card-text">
+            </a>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">Unparalleled Beauty</h5>
+            <p class="card-text">
+                Be inspired by the enchanting San Juan Islands
+            </p>
+        </div>
+    </div>
+
+    <!-- Card 2: Be Amazed -->
+    <div class="card text-center ">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src="{{ url_for('static', filename='images/killerwhale.jpg') }}" class="img-fluid" />
+            <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+            </a>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">Be Amazed</h5>
+            <p class="card-text">
                 The Pacific Northwest is home to an abundance of wildlife
-              </p>
-          
-          
-            </div>
-          </div>
+            </p>
+        </div>
     </div>
-    <div class="card-columns">
-      <div class="card text-center ">
+</div>
+
+<div class="card-columns">
+    <!-- Card 3: Feel at Home -->
+    <div class="card text-center ">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="{{ url_for('static', filename='images/lobby.jpg') }}" class="img-fluid" />
-          <a href="#!">
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-          </a>
-        </div>
-      
-        <div class="card-body">
-          <h5 class="card-title">Feel at Home</h5>
-          <p class="card-text">
-            Relax in style in our newly renovated lobby
-          </p>
-      
-      
-        </div>
-      </div>
-          <div class="card text-center ">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="{{ url_for('static', filename='images/room.jpg') }}" class="img-fluid" />
-              <a href="#!">
+            <img src="{{ url_for('static', filename='images/lobby.jpg') }}" class="img-fluid" />
+            <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-              </a>
-            </div>
-          
-            <div class="card-body">
-              <h5 class="card-title">Luxury Rooms</h5>
-              <p class="card-text">
-                Your escape from the hustle and bustle of reality
-              </p>
-          
-          
-            </div>
-          </div>
+            </a>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">Feel at Home</h5>
+            <p class="card-text">
+                Relax in style in our newly renovated lobby
+            </p>
+        </div>
     </div>
-  </div>
+
+    <!-- Card 4: Luxury Rooms -->
+    <div class="card text-center ">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src="{{ url_for('static', filename='images/room.jpg') }}" class="img-fluid" />
+            <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+            </a>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">Luxury Rooms</h5>
+            <p class="card-text">
+                Your escape from the hustle and bustle of reality
+            </p>
+        </div>
+    </div>
+</div>
+
+</div>
 {% endblock %}

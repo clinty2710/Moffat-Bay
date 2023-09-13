@@ -1,5 +1,5 @@
 <!--
-    Charlie Team: Clint Steadman, joshua Welch, Aura Elle Winters, Riese Bohnak
+    Charlie Team: Clint Steadman, Joshua Welch, Aura Elle Winters, Riese Bohnak
     CSD460 Capstone Project
 
     profile.html
@@ -7,38 +7,58 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Profile {% endblock %}
+{% block title %}
+    Profile
+{% endblock %}
 
 {% block content %}
+    <!-- Edit Profile Section -->
     <h2><br>Edit Profile</h2>
     <form method="POST" action="/profile">
+        <!-- Include the hidden form fields for CSRF protection -->
         {{ form.hidden_tag() }}
+
+        <!-- First Name Field -->
         <div class="form-group">
             {{ form.First_name.label(class="form-label") }}
             {{ form.First_name(class="form-control", placeholder="First Name") }}
         </div>
+
+        <!-- Last Name Field -->
         <div class="form-group">
             {{ form.Last_name.label(class="form-label") }}
             {{ form.Last_name(class="form-control", placeholder="Last Name") }}
         </div>
+
+        <!-- Email Field (Readonly) -->
         <div class="form-group">
             {{ form.Email.label(class="form-label") }}
             {{ form.Email(class="form-control", placeholder="Email", readonly="readonly") }}
-        </div>        
+        </div>
+
+        <!-- Phone Number Field -->
         <div class="form-group">
             {{ form.Phone_number.label(class="form-label") }}
             {{ form.Phone_number(class="form-control", placeholder="Phone Number") }}
         </div>
+
+        <!-- Password Field -->
         <div class="form-group">
             {{ form.Password.label(class="form-label") }}
             {{ form.Password(class="form-control", placeholder="Password") }}
         </div>
+
+        <!-- Save Changes Button -->
         <div style="text-align: center; margin-top: 10px;">
             <button type="submit" class="btn btn-success btn-lg">Save Changes</button>
         </div>
+
+        <!-- Reservation Lookup Tool Button -->
         <div style="text-align: center; margin-top: 10px;">
             <a href="{{url_for('app.global_search')}}" class="btn btn-primary btn-md">Reservation Lookup Tool</a>
         </div>
+
+        <!-- Show All Reservations Button -->
         <div style="text-align: center; margin-top: 10px;">
             <a href="{{url_for('app.show_reservations')}}" class="btn btn-primary btn-md">Show All Reservations</a>
         </div>
