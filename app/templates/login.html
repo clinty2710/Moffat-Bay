@@ -14,7 +14,7 @@
     <p>Don't have an account? Create one here <a href="{{ url_for('app.register') }}">
     <button type="submit" class="btn btn-primary btn-sm">Register</button>   
     </a></p>
-    <form class="form" action="" method="post" style="margin-bottom: 300px">
+    <form class="form" action="" method="post" style="margin-bottom: 100px">
         {{ form.hidden_tag() }}
         <div class="form-group">
             <label for="{{ form.username.id }}" class="form-label required-field">Email</label>
@@ -26,6 +26,10 @@
         </div>
         <p> <a href="{{ url_for('app.forgot_password') }}" class="btn btn-primary btn-sm">Forgot Password?</a></p>
         <button type="submit" class="btn btn-success btn-lg">Login</button>
-
     </form>
+
+    <p style="text-align: center;">Look up reservation without logging in<br>
+        <a href="{{ url_for('app.global_search') }}" class="btn btn-primary" 
+        style="margin-top: 20px; margin-bottom: 50px;">Click Here</a></p>
+
 {% endblock %}
