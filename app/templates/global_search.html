@@ -21,7 +21,16 @@
             {{ form.reservation.label }}
             {{ form.reservation(class="form-control", placeholder="Enter Reservation ID") }}
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+        <div style="text-align: center; margin-top: 10px;">
+        <button type="submit" class="btn btn-success">Search</button>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="{{ url_for('app.new_reservation') }}">
+                <button type="button" class="btn btn-primary btn-md">Add Reservation</button></a>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="{{url_for('app.show_reservations')}}" class="btn btn-primary btn-md">Show All Reservations</a>
+        </div>
     </form>
 
     {% if reservations %}
@@ -71,7 +80,7 @@
                 <p>Room ID: <span id="modalRoomId"></span></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
