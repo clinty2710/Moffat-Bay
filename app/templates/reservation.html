@@ -138,6 +138,22 @@
   </form>
 </div>
 <script>
+  $('#hotel-image').ready(function () {
+    // Save original image dimensions
+    var originalImageWidth = $('#hotel-image').width();
+    // Store original coordinates as data attribute for each area
+    $('map[name="image-map"] area').each(function () {
+      var originalCoords = $(this).attr('coords');
+      $(this).data('original-coords', originalCoords);
+    });
+    // Initial update
+    updateAreaCoordinates();
+    });
+  var roomMap;
+  // Update coordinates on window resize
+  $(window).resize(function () {
+    updateAreaCoordinates();
+  });
   $(document).ready(function () {
     $('#openModalButton').click(function () {
       // Get the selected start and end dates, price, guests, and room number
@@ -155,7 +171,6 @@
       // Show the modal
       $('#confirmationModal').modal('show');
     });
-
     // Quick hack to close modal, not sure why data-dismiss isn't working
     $('#closeModalButton').click(function () {
       $('#confirmationModal').modal('hide');
@@ -163,10 +178,8 @@
     $('#closeModalButton2').click(function () {
       $('#confirmationModal').modal('hide');
     });
-
     // Disable the submit button initially
     $('#submit').prop('disabled', true);
-
     // Event handler for the checkbox
     $('#confirmationCheckbox').change(function () {
       if ($(this).is(':checked')) {
@@ -182,7 +195,8 @@
       // Submit the form
       $('#form').submit();
     });
-      // Function to update area coordinates based on the current image size
+  // Function to update area coordinates based on the current image size
+  // this will be overwritten by the hotel-image ready function
   function updateAreaCoordinates() {
     var imageWidth = $('#hotel-image').width();
     var imageHeight = $('#hotel-image').height();
@@ -196,26 +210,6 @@
       $(this).attr('coords', scaledCoords.join(','));
     });
   }
-
-  // Save original image dimensions
-  var originalImageWidth = $('#hotel-image').width();
-
-  // Store original coordinates as data attribute for each area
-  $('map[name="image-map"] area').each(function () {
-    var originalCoords = $(this).attr('coords');
-    $(this).data('original-coords', originalCoords);
-  });
-
-  // Update coordinates on window resize
-  $(window).resize(function () {
-    updateAreaCoordinates();
-  });
-
-  // Initial update
-  updateAreaCoordinates();
-});
-var roomMap;
-$(document).ready(function () {
   var image = $('#hotel-image');
   var unavailableRooms = [];
   var currentRoom = null;
