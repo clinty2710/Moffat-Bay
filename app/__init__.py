@@ -30,6 +30,11 @@ app.register_blueprint(views.bp)
 
 # Function to create tables and insert sample data
 def create_tables():
+    """Creates the necessary tables in the database and inserts initial data.
+    
+    Raises:
+        Exception: If there is an error during the database initialization or data insertion.
+    """
     from .models import db, User, Reservation
     with app.app_context():
         try:
