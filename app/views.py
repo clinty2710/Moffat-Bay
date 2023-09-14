@@ -16,10 +16,33 @@ bp = Blueprint('app', __name__)
 
 @bp.errorhandler(404)
 def page_not_found(e):
+    """Handle page not found error.
+    
+    Args:
+        e (Exception): The exception object.
+    
+    Returns:
+        tuple: A tuple containing the rendered template and the HTTP status code.
+    
+    Example:
+        >>> page_not_found(Exception())
+        ('<html>...</html>', 404)
+    """
     return render_template('404.html'), 404
 
 @bp.errorhandler(500)
 def internal_error(e):
+    """Return a tuple containing the rendered template '500.html' and the HTTP status code 500.
+    
+    Args:
+        e: The exception that caused the internal error.
+    
+    Returns:
+        A tuple containing the rendered template and the HTTP status code.
+    
+    Example:
+        internal_error(Exception("Internal Server Error"))
+    """
     return render_template('500.html'), 500
 
 #generate salt
@@ -28,6 +51,11 @@ salt = bcrypt.gensalt()
 #session key for user logged in
 @bp.context_processor
 def inject_user():
+    """Injects the current user into the template context.
+    
+    Returns:
+        dict: A dictionary containing the current user object if the user is logged in, otherwise None.
+    """
     user_id = session.get('user_id')
     if user_id:
         user = User.query.get(user_id)
@@ -36,16 +64,38 @@ def inject_user():
 
 @bp.route("/")
 def index():
+    """Renders the index.html template.
+    
+    Returns:
+        str: The rendered index.html template.
+    """
     return render_template("index.html")
 
 @bp.route('/show_database')
 def show_database():
+    """Show the database.
+    
+    This function retrieves all users and reservations from the database and renders them in a template called 'db.html'.
+    
+    Returns:
+        str: The rendered template with the users and reservations as arguments.
+    """
     users = User.query.all()
     reservations = Reservation.query.all()
     return render_template('db.html', users=users, reservations=reservations)
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
+    """Registers a new user.
+    
+    This function creates a new user by validating the registration form data. If the form data is valid, the function creates a new user object, hashes the password, and saves the user to the database. It also logs in the user automatically by setting the user_id in the session.
+    
+    Returns:
+        str: The URL to redirect to after successful registration.
+    
+    Raises:
+        None
+    """
     form = RegistrationForm()
     if form.validate_on_submit():
         flash('Account created successfully!', 'success')
@@ -69,6 +119,12 @@ def register():
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    """Logs in a user by validating the login form and checking the provided email and password against the database.
+    
+    Returns:
+        - If the login is successful, redirects the user to the next URL or the homepage.
+        - If the login fails, displays an error message and renders the login template.
+    """
     form = LoginForm()
     if form.validate_on_submit():
         # Fetch the user from the database based on the provided email
@@ -85,6 +141,13 @@ def login():
 
 @bp.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
+    """Handles the forgot password functionality.
+    
+    This function is responsible for handling the forgot password functionality. It checks if the request method is POST, and if so, it queries the User table to find a user with the provided email address. If a user is found, it flashes a message to check the email for a password reset link and redirects to the index page. If no user is found, it flashes a message that the email address was not found and redirects back to the forgot password page. If the request method is not POST, it renders the forgot_password.html template with the ForgotPasswordForm and flashes a message to enter the email address.
+    
+    Returns:
+        str: The rendered template or a redirect response.
+    """
     if request.method == 'POST':
         user = User.query.filter_by(Email=request.form['Email']).first()
         if user:
@@ -100,12 +163,30 @@ def forgot_password():
 
 @bp.route('/logout')
 def logout():
+    """Logout the user.
+    
+    This function removes the user's ID from the session and flashes a message indicating successful logout. It then redirects the user to the index page.
+    
+    Returns:
+        str: A string indicating the success of the logout process.
+    """
     session.pop('user_id', None)  # Remove user's ID from the session
     flash('Logged out successfully!', 'info')
     return redirect(url_for('app.index'))
 
 @bp.route('/profile', methods=['GET', 'POST'])
 def profile():
+    """This function is used to handle the profile page. It checks if the user is logged in, and if not, it flashes a message asking the user to login and redirects to the login page. 
+    
+    If the user is logged in, it retrieves the user's information from the database and creates an instance of the UpdateProfile form. 
+    
+    If the request method is POST, it updates the user's information based on the form data. It checks if a new password is provided, hashes it, and stores it securely. It also updates the user's first name, last name, and phone number. The changes are then saved to the database. 
+    
+    Finally, it sets the form fields with the user's current information and renders the profile.html template, passing the form and user objects to it.
+    
+    Returns:
+        str: The rendered profile.html template with the form and user objects.
+    """
     if not session.get('user_id'):
         flash('Please login to change your profile.', 'info')
         return redirect(url_for('app.login', next=request.url))
@@ -140,6 +221,16 @@ def profile():
 
 @bp.route('/reservation/new', methods=['GET', 'POST'])
 def new_reservation():
+    """Creates a new reservation.
+    
+    If the user is not logged in, it flashes a message to login and redirects to the login page.
+    Otherwise, it renders the new reservation form and handles form submission.
+    
+    Returns:
+        If the form is submitted and confirmed, it adds the reservation to the database and redirects to the reservations page.
+        If the form is submitted but not confirmed, it renders the reservation form again.
+        If the form is not submitted, it renders the reservation form.
+    """
     if not session.get('user_id'):
         flash('Please login to make a reservation.', 'info')
         return redirect(url_for('app.login', next=request.url))
@@ -182,6 +273,22 @@ def new_reservation():
 
 @bp.route('/reservation/edit/<int:reservation_id>', methods=['GET', 'POST'])
 def edit_reservation(reservation_id):
+    """Edit a reservation.
+    
+    Args:
+        reservation_id (int): The ID of the reservation to be edited.
+    
+    Returns:
+        str: A string indicating the result of the edit operation. This can be one of the following:
+            - If the user is not logged in, a flash message is displayed and the user is redirected to the login page.
+            - If the reservation with the given ID is not found, a flash message is displayed and the user is redirected to the reservations page.
+            - If the user does not have permission to edit the reservation, a flash message is displayed and the user is redirected to the reservations page.
+            - If the form is submitted and valid, the reservation is updated in the database and a success flash message is displayed. The user is then redirected to the reservations page.
+            - If the form is not submitted or not valid, the reservation edit form is rendered.
+    
+    Raises:
+        None.
+    """
     if not session.get('user_id'):
         flash('Please login to edit a reservation.', 'info')
         return redirect(url_for('app.login', next=request.url))
@@ -232,6 +339,19 @@ def edit_reservation(reservation_id):
     return render_template('reservation.html', form=form, reservation_id=reservation_id)
 
 def price_of_room(num_guests):
+    """Calculate the price of a room based on the number of guests.
+    
+    Args:
+        num_guests (int): The number of guests staying in the room.
+    
+    Returns:
+        float: The price of the room, including a 5% tax.
+    
+    Notes:
+        - For up to 2 guests, the price is $115 per night.
+        - For 3 to 5 guests, the price is $150 per night.
+        - For 6 or more guests, the price is not available (returns None).
+    """
     guests = int(num_guests)
     if guests <= 2:
         return 115 * 1.05
@@ -242,6 +362,14 @@ def price_of_room(num_guests):
 
 @bp.route('/show_reservations', methods=['GET'])
 def show_reservations():
+    """Shows the reservations for the logged-in user.
+    
+    Returns:
+        str: The HTML content of the 'show_reservations.html' template, with the reservations data.
+        
+    Raises:
+        Redirect: If the user is not logged in, redirects to the login page.
+    """
     if not session.get('user_id'):
         flash('Please login to view your reservations.', 'info')
         return redirect(url_for('app.login', next=request.url))
@@ -250,6 +378,21 @@ def show_reservations():
 
 @bp.route('/delete_reservation')
 def delete_reservation():
+    """'''
+    Deletes a reservation.
+    
+    If the user is not logged in, it flashes a message to login and redirects to the login page.
+    If the reservation ID is not provided or the reservation is not found, it flashes a message and redirects to the reservations page.
+    If the user does not have permission to delete the reservation, it flashes a message and redirects to the reservations page.
+    Otherwise, it deletes the reservation from the database, commits the changes, flashes a success message, and redirects to the reservations page.
+    
+    Returns:
+        A redirect response to the reservations page.
+    
+    Raises:
+        None.
+    '''
+    """
     if not session.get('user_id'):
         flash('Please login to delete a reservation.', 'info')
         return redirect(url_for('app.login', next=request.url))
@@ -268,6 +411,17 @@ def delete_reservation():
 
 @bp.route('/get_room_availability', methods=['GET'])
 def get_room_availability():
+    """Get room availability.
+    
+    Checks if the user is logged in. If not, it flashes a message to login and redirects to the login page.
+    Retrieves the start and end dates from the request arguments.
+    If both start and end dates are provided, it queries the reservations table to find rooms that are unavailable within the specified date range.
+    Returns a JSON response containing a list of unavailable room numbers.
+    If no start and end dates are provided, it returns an empty list.
+    
+    Returns:
+        str: JSON response containing a list of unavailable room numbers or an empty list.
+    """
     if not session.get('user_id'):
         flash('Please login to view room availability.', 'info')
         return redirect(url_for('app.login', next=request.url))
@@ -291,6 +445,11 @@ def get_room_availability():
 
 @bp.route('/get_room_price', methods=['GET'])
 def get_room_price():
+    """Get the price of a room based on the number of guests and number of days.
+    
+    Returns:
+        str: The price of the room in the format "Price: $X.XX" if the number of guests is provided, otherwise returns None.
+    """
     num_of_guests = request.args.get('num_of_guests')
     num_of_days = int(request.args.get('num_of_days', 1))
     if num_of_guests:
@@ -302,14 +461,29 @@ def get_room_price():
 
 @bp.route('/about')
 def about():
+    """Renders the about page.
+    
+    Returns:
+        str: The rendered HTML content of the about page.
+    """
     return render_template('about.html')
 
 @bp.route('/attractions')
 def attractions():
+    """Return the attractions.html template.
+    
+    Returns:
+        str: The HTML template for the attractions page.
+    """
     return render_template('attractions.html')
 
 @bp.route('/global_search', methods=['GET', 'POST'])
 def global_search():
+    """Performs a global search for reservations based on email or reservation ID.
+    
+    Returns:
+        str: The rendered template 'global_search.html' with the form, reservations, and email variables.
+    """
     form = SearchByEmailOrRID()
 
     email = None
