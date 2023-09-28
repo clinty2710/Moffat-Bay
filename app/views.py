@@ -103,6 +103,11 @@ def register():
         # Generate a salt and hash the password before saving to the database
         hashed_password = bcrypt.hashpw(form.Password.data.encode('utf-8'), salt)
         
+        check_user = User.query.filter_by(Email=form.Email.data).first()
+        if check_user:
+            flash('Email address already exists.', 'danger')
+            return redirect(url_for('app.register'))
+
         # Create a new user and save to the database
         new_user = User(
             Email=form.Email.data,
@@ -458,7 +463,6 @@ def get_room_price():
     else:
         return jsonify(None)
     
-
 @bp.route('/about')
 def about():
     """Renders the about page.
