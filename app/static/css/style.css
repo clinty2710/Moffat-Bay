@@ -117,8 +117,9 @@ body::before {
 .title-line1 {
     color: #fff;
     font-size: 70px;
+    font-weight: 900;
     margin-bottom: 0px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    text-shadow: 6px 3px 2px rgba(0, 0, 0, 0.9);
 }
 
 .action-call {
