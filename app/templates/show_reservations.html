@@ -14,6 +14,28 @@
     <!-- Header -->
     <h1><br>Reservations</h1><br><br>
 
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this reservation?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="#" id="confirmDelete" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Table for displaying reservations -->
     <table class="table table-striped">
         <thead>
@@ -43,7 +65,7 @@
                         <!-- Buttons for editing and deleting reservations -->
                         <div class="btn-group" role="group">
                             <a href="{{ url_for('app.edit_reservation', reservation_id=reservation.rid) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{{ url_for('app.delete_reservation', reservation_id=reservation.rid) }}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteConfirmationModal" data-reservation-id="{{ reservation.rid }}">Delete</a>
                         </div>
                     </td>
                 </tr>
@@ -57,4 +79,24 @@
             <button type="button" class="btn btn-success btn-lg">Add Reservation</button>
         </a>
     </div>
+    <script>
+        $(document).ready(function() {
+            // Handle the "Delete" button click
+            $('.btn-danger').click(function() {
+                var reservationId = $(this).data('reservation-id');
+                // Set the reservation ID in the modal's "Delete" button
+                $('#confirmDelete').data('reservation-id', reservationId);
+            });
+    
+            // Handle the confirmation modal's "Delete" button click
+            $('#confirmDelete').click(function() {
+                // Get the reservation ID from the modal's data attribute
+                var reservationId = $(this).data('reservation-id');
+                // Redirect to the delete route with the reservation ID
+                window.location.href = "{{ url_for('app.delete_reservation', reservation_id='') }}" + reservationId;
+            });
+        });
+    </script>
+    
+    
 {% endblock %}
