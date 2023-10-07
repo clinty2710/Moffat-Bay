@@ -36,11 +36,16 @@
             {{ form.password(class="form-control", required="required") }}
         </div>
 
-        <!-- Forgot Password Link -->
-        <p> <a href="{{ url_for('app.forgot_password') }}" class="btn btn-primary btn-sm">Forgot Password?</a></p>
-
         <!-- Login Button -->
-        <button type="submit" class="btn btn-success btn-lg">Login</button>
+        <div style="text-align: center; margin-top: 10px;">
+            <button type="submit" class="btn btn-success btn-lg">Login</button>
+        </div>
+
+        <!-- Forgot Password Link -->
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="{{ url_for('app.forgot_password') }}" class="btn btn-primary btn-sm">Forgot Password?</a>
+        </div>
+
     </form>
 
     <!-- Reservation Lookup Link -->

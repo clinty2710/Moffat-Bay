@@ -8,7 +8,6 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <!-- Define the title for this page -->
     Moffat Bay Lodge
 {% endblock %}
 
@@ -19,7 +18,7 @@
     <!-- Container for the main content -->
 
     <!-- Banner Image -->
-    <img src="{{ url_for('static', filename='images/bannertitle2.png') }}" alt="Banner Image" style="max-width: 109.5%; height: auto;">
+    <img src="{{ url_for('static', filename='images/bannertitle.png') }}" alt="Banner Image" style="max-width: 109.5%; height: auto;">
 
     <div class="row content-center">
         <!-- Center the content within a row -->
@@ -35,9 +34,9 @@
 
 <!-- Action Call Section -->
 <p class="action-call">
-    Welcome to your next vacation<br>
+    Welcome to your next vacation!<br>
     Book your dream stay <a href="{{ url_for('app.new_reservation')}}" class="action-link">
-        <button type="submit" class="btn btn-success btn-lg" style="font-family: 'comfortaa';">NOW!</button>
+        <button type="submit" class="btn btn-success btn-lg" style="font-family: 'comfortaa';">NOW</button>
     </a>
 </p>
 
